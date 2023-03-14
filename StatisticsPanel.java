@@ -46,9 +46,10 @@ public class StatisticsPanel extends Application
         rightButton.setText(">");
 
         middleLabel.setPadding(new Insets(50, 50, 50, 50));
+        middleLabel.setId("midB");
 
-        BorderPane.setMargin(leftButton, new Insets(2,5,2,5));
-        BorderPane.setMargin(rightButton, new Insets(2,5,2,5));
+        BorderPane.setMargin(leftButton, new Insets(2,0,2,5));
+        BorderPane.setMargin(rightButton, new Insets(2,5,2,0));
 
         rightButton.setOnAction(this::rightButtonClick);
         leftButton.setOnAction(this::leftButtonClick);
@@ -60,7 +61,8 @@ public class StatisticsPanel extends Application
 
         // JavaFX must have a Scene (window content) inside a Stage (window)
         Scene scene = new Scene(bPane, 800, 500);
-        stage.setTitle("JavaFX Example");
+        scene.getStylesheets().add("statisticsPanel.css");
+        stage.setTitle("Statistics");
         stage.setScene(scene);
 
         // Show the Stage (window)

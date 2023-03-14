@@ -16,8 +16,9 @@ public class Statistics
      */
     public Statistics()
     {
-        statList.add("Total deaths in all London boroughs: " + loadTotalDeaths());
-        statList.add("Average cases per London borough: " + averageCases());
+        loadStats();
+        statList.add("Total deaths in all London boroughs: \n" + loadTotalDeaths());
+        statList.add("Average cases per London borough: \n" + averageCases());
         statList.add("statistic 3");
         statList.add("statistic 4");
         statList.add("statistic 5");
@@ -40,7 +41,7 @@ public class Statistics
     }
 
     private int loadTotalDeaths(){
-        loadStats();
+  
         int totalLondonDeaths = 0;
         for(CovidData record : statisticsLoader.getData()){
             totalLondonDeaths += record.getNewDeaths();
@@ -49,7 +50,7 @@ public class Statistics
     }
 
     private int averageCases(){
-        loadStats();
+ 
         int averageCases = 0;
         for(CovidData record : statisticsLoader.getData()){
             averageCases += record.getNewCases();

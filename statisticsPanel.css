@@ -1,0 +1,8 @@
+.label {
+    -fx-text-alignment: center;
+    -fx-font-size: 20;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#777777, #bbbbbb);
+}
