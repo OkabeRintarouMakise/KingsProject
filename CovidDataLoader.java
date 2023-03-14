@@ -9,13 +9,13 @@ import com.opencsv.CSVReader;
 import java.net.URISyntaxException;
 
 public class CovidDataLoader {
- 
+    private ArrayList<CovidData> records = new ArrayList<CovidData>();
     /** 
      * Return an ArrayList containing the rows in the Covid London data set csv file.
      */
-    public ArrayList<CovidData> load() {
+    public void load() {
         System.out.println("Begin loading Covid London dataset...");
-        ArrayList<CovidData> records = new ArrayList<CovidData>();
+        
         try{
             URL url = getClass().getResource("covid_london.csv");
             CSVReader reader = new CSVReader(new FileReader(new File(url.toURI()).getAbsolutePath()));
@@ -47,7 +47,6 @@ public class CovidDataLoader {
             e.printStackTrace();
         }
         System.out.println("Number of Loaded Records: " + records.size());
-        return records;
     }
 
     /**
@@ -74,6 +73,9 @@ public class CovidDataLoader {
             return Integer.parseInt(intString);
         }
         return -1;
+    }
+    public ArrayList<CovidData> getData(){
+    return records;
     }
 
 }
