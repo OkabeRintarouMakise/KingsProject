@@ -1,5 +1,4 @@
 
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.layout.*;
-
+import java.util.ArrayList;
 
 /**
  * Write a description of JavaFX class StatisticsPanel here.
@@ -20,9 +19,13 @@ import javafx.scene.layout.*;
  */
 public class StatisticsPanel extends Application
 {
+    private int statIndex = 0;
+    Statistics statistics = new Statistics();
     Button leftButton = new Button();
     Button rightButton = new Button();
-    Label middleLabel = new Label("statistics: ");
+    Label middleLabel = new Label(statistics.getStat(statIndex));
+
+
     /**
      * The start method is the main entry point for every JavaFX application. 
      * It is called after the init() method has returned and after 
@@ -34,29 +37,26 @@ public class StatisticsPanel extends Application
     public void start(Stage stage)
     {
         BorderPane bPane = new BorderPane();
-     
+
         leftButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         rightButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         leftButton.setPadding(new Insets(50, 10, 50, 10));
         rightButton.setPadding(new Insets(50, 10, 50, 10));
         leftButton.setText("<");
         rightButton.setText(">");
-        
+
         middleLabel.setPadding(new Insets(50, 50, 50, 50));
-        
 
         BorderPane.setMargin(leftButton, new Insets(2,5,2,5));
         BorderPane.setMargin(rightButton, new Insets(2,5,2,5));
 
-        
-   
-        
+        rightButton.setOnAction(this::rightButtonClick);
+        leftButton.setOnAction(this::leftButtonClick);
         
         bPane.setLeft(leftButton);
         bPane.setCenter(middleLabel);
         bPane.setRight(rightButton);
-        
-        
+
 
         // JavaFX must have a Scene (window content) inside a Stage (window)
         Scene scene = new Scene(bPane, 800, 500);
@@ -67,5 +67,30 @@ public class StatisticsPanel extends Application
         stage.show();
     }
 
+    private void rightButtonClick(ActionEvent event){
+        statIndex++;
+        if(statIndex < 5) {
+            middleLabel.setText(statistics.getStat(statIndex));
+        }
+        else{
+            statIndex = 0;
+            middleLabel.setText(statistics.getStat(statIndex));
+
+        }
+
+    }
+    
+    private void leftButtonClick(ActionEvent event){
+        statIndex--;
+        if(statIndex > -1) {
+            middleLabel.setText(statistics.getStat(statIndex));
+        }
+        else{
+            statIndex = 4;
+            middleLabel.setText(statistics.getStat(statIndex));
+
+        }
+
+    }
 
 }
