@@ -8,6 +8,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.stage.*;
 import javafx.stage.Stage;
 
 import javafx.scene.control.*;
@@ -20,7 +21,9 @@ import javafx.scene.control.*;
  */
 public class CovidDataGUI extends Application
 {
-
+    private Stage stage;
+    Button leftButton = new Button();
+    Button rightButton = new Button();
     
     /**
      * The start method is the main entry point for every JavaFX application. 
@@ -32,20 +35,44 @@ public class CovidDataGUI extends Application
     @Override
     public void start(Stage stage)
     {
+        this.stage = stage;
         
         BorderPane borderPane = new BorderPane();
         MenuBar menu = new MenuBar();
-        AnchorPane anchorPane = new AnchorPane();
         HBox hbox = new HBox();
-
+        AnchorPane anchorPane = new AnchorPane();
+        
         borderPane.setTop(menu);
-        borderPane.setBottom(anchorPane);
         borderPane.setCenter(hbox);
+        borderPane.setBottom(anchorPane);
+        
+        leftButton.setText("<");
+        leftButton.setMaxWidth(Double.MAX_VALUE);
+        
+        rightButton.setText(">");
+        rightButton.setMaxWidth(Double.MAX_VALUE);
+        
+        
+        
+        
+        AnchorPane.setLeftAnchor(leftButton, 0d);
+        AnchorPane.setRightAnchor(rightButton, 0d);
+        
+        anchorPane.getChildren().addAll(leftButton, rightButton);
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
         // JavaFX must have a Scene (window content) inside a Stage (window)
-        Scene scene = new Scene(borderPane);
+        Scene scene = new Scene(borderPane, 550, 400);
         stage.setScene(scene);
-        stage.setTitle("hello");
+        stage.setTitle("Welcome");
         // Show the Stage (window)
         stage.show();
     }
