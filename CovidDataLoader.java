@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 
 public class CovidDataLoader {
     private ArrayList<CovidData> records = new ArrayList<CovidData>();
+    
     /** 
      * Return an ArrayList containing the rows in the Covid London data set csv file.
      */
