@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import java.util.Collections;
 import java.util.Arrays;
 import java.util.ArrayList;
 import javafx.scene.layout.BorderPane;
@@ -24,6 +25,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.CheckMenuItem;
+import java.text.DateFormatSymbols;
+import java.util.Comparator;
 
 
 /**
@@ -36,6 +39,10 @@ public class GraphPanel extends Application
 {
     private BorderPane root = new BorderPane();
     private ArrayList<CovidData> records;
+    private String boroughValue;
+    private String gmrValue;
+    private String graphValue;
+    private String yearValue;
     
     /**
      * The start method is the main entry point for every JavaFX application. 
@@ -100,6 +107,9 @@ public class GraphPanel extends Application
         loader.load();
         
         records = loader.getData();
+        
+        Collections.sort(records, new SortByDate());
+        
         String[] boroughs = new String[33];
         
         for(int i = 0; i < boroughs.length; i++)
@@ -115,6 +125,7 @@ public class GraphPanel extends Application
         }
         
         boroughBox.getSelectionModel().selectFirst();
+        boroughValue = (String) boroughBox.getValue();
         
         for(CovidData record: records)
         {
@@ -137,6 +148,7 @@ public class GraphPanel extends Application
     {
        root.setCenter(null);
        ComboBox graphType = (ComboBox) event.getSource();
+       graphValue = (String) graphType.getValue();
        
        final NumberAxis yAxis = new NumberAxis();
        final CategoryAxis xAxis = new CategoryAxis();
@@ -151,28 +163,31 @@ public class GraphPanel extends Application
        
        for(CovidData record: records)
        {
-           if(record.getDate().equals("2022-10-15"))
+           if(record.getDate().startsWith("2021") && record.getBorough().equals(boroughValue))
            {
-               series1.getData().add(new XYChart.Data(record.getBorough(), record.getParksGMR())); 
-               series2.getData().add(new XYChart.Data(record.getBorough(), record.getTransitGMR())); 
+               int month = Integer.parseInt(record.getDate().substring(5,7));
+               String monthString = new DateFormatSymbols().getMonths()[month-1];
+               monthString = monthString.substring(0,3);
+               series1.getData().add(new XYChart.Data(monthString, record.getParksGMR())); 
+               series2.getData().add(new XYChart.Data(monthString, record.getTransitGMR())); 
            }
        }
 
-       if(graphType.getValue().equals("Bar Chart"))
+       if(graphValue.equals("Bar Chart"))
        {
            final BarChart barChart = new BarChart(xAxis, yAxis);
            root.setCenter(barChart);
            barChart.setTitle("Google Mobility Measures");    
            barChart.getData().addAll(series1, series2);
        }
-       else if(graphType.getValue().equals("Line Graph"))
+       else if(graphValue.equals("Line Graph"))
        {
            final LineChart lineChart = new LineChart(xAxis, yAxis);
            root.setCenter(lineChart);
            lineChart.setTitle("Google Mobility Measures");  
            lineChart.getData().addAll(series1, series2);
        }
-       else if(graphType.getValue().equals("Scatter Graph"))
+       else if(graphValue.equals("Scatter Graph"))
        {
            final ScatterChart scatterChart = new ScatterChart(xAxis, yAxis);
            root.setCenter(scatterChart);
@@ -180,5 +195,13 @@ public class GraphPanel extends Application
            scatterChart.getData().addAll(series1, series2);
        }
     
+    }
+}
+
+class SortByDate implements Comparator<CovidData>
+{
+    public int compare(CovidData a, CovidData b)
+    {
+        return a.getDate().compareTo(b.getDate());
     }
 }
