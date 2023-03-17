@@ -1,9 +1,9 @@
 
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.scene.*;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
@@ -11,10 +11,10 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import java.util.Collections;
 import java.util.Arrays;
@@ -26,7 +26,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.CheckMenuItem;
 import java.text.DateFormatSymbols;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import javafx.collections.ObservableList;
@@ -170,7 +169,7 @@ public class GraphPanel extends Application
        final CategoryAxis xAxis = new CategoryAxis();
        yAxis.setLabel("Activity change %");
        xAxis.setLabel("Month");
-       
+   
        for(CovidData record: records)
        {
            if(record.getBorough().equals(boroughValue) && record.getDate().substring(8,10).equals("15"))
@@ -183,11 +182,11 @@ public class GraphPanel extends Application
                {
                    /*if(!series.getData().isEmpty())
                    {
-                       Iterator<ObservableList<XYChart.Data>> it = series.getData().iterator();
+                       Iterator<XYChart.Data> it = series.getData().iterator();
            
                        while(it.hasNext())
                        {
-                           ObservableList<XYChart.Data> data = it.next();
+                           XYChart.Data data = it.next();
                            
                            if(data.equals(new XYChart.Data(monthString, record.getParksGMR())))
                            {
@@ -199,9 +198,9 @@ public class GraphPanel extends Application
                    
                    if(series.getName().equals(record.getDate().substring(0,4)))
                    {
-                       series.getData().add(new XYChart.Data(monthString, record.getParksGMR()));
+                       XYChart.Data data = new XYChart.Data(monthString, record.getParksGMR());
+                       series.getData().add(data);
                    }
-                
                }
         
            }
@@ -270,13 +269,5 @@ public class GraphPanel extends Application
         {
             series.getData().clear();
         }
-    }
-}
-
-class SortByDate implements Comparator<CovidData>
-{
-    public int compare(CovidData a, CovidData b)
-    {
-        return a.getDate().compareTo(b.getDate());
     }
 }
