@@ -74,6 +74,10 @@ public class CovidDataLoader {
         }
         return -1;
     }
+    
+    /**
+     * @return the arraylist of all the records 
+     */
     public ArrayList<CovidData> getData(){
     return records;
     }
