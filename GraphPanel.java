@@ -27,7 +27,9 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.CheckMenuItem;
 import java.text.DateFormatSymbols;
 import java.util.Comparator;
-
+import java.util.HashSet;
+import java.util.Iterator;
+import javafx.collections.ObservableList;
 
 /**
  * Write a description of JavaFX class GraphPanel here.
@@ -39,6 +41,7 @@ public class GraphPanel extends Application
 {
     private BorderPane root = new BorderPane();
     private ArrayList<CovidData> records;
+    private HashSet<XYChart.Series> yearSeries = new HashSet<>();
     private String boroughValue;
     private String gmrValue;
     private String graphValue;
@@ -60,11 +63,16 @@ public class GraphPanel extends Application
         
         CheckMenuItem year1 = new CheckMenuItem("2020");
         year1.setSelected(true);
+        XYChart.Series year1Series = new XYChart.Series();
+        year1Series.setName(year1.getText());
+        yearSeries.add(year1Series);
         CheckMenuItem year2 = new CheckMenuItem("2021");
         CheckMenuItem year3 = new CheckMenuItem("2022");
-        CheckMenuItem year4 = new CheckMenuItem("2023");
         
-        MenuButton yearsButton = new MenuButton("Year", null, year1, year2, year3, year4);
+        MenuButton yearsButton = new MenuButton("Year", null, year1, year2, year3);
+        year1.setOnAction(this::addSeries);
+        year2.setOnAction(this::addSeries);
+        year3.setOnAction(this::addSeries);
         
         HBox hbox = new HBox();
         hbox.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -75,8 +83,10 @@ public class GraphPanel extends Application
         graphTypeBox.getItems().add("Bar Chart");
         graphTypeBox.getItems().add("Scatter Graph");
         graphTypeBox.getSelectionModel().selectFirst();
+        graphValue = (String) graphTypeBox.getValue();
         
-        graphTypeBox.setOnAction(e -> buttonClick(e));
+        
+        graphTypeBox.setOnAction(e -> graphClick(e));
         
         gmrBox.getItems().add("Grocery And Pharmacy");
         gmrBox.getItems().add("Parks");
@@ -85,23 +95,10 @@ public class GraphPanel extends Application
         gmrBox.getItems().add("Transit Stations");
         gmrBox.getItems().add("Workplaces");
         gmrBox.getSelectionModel().selectFirst();
+        gmrValue = (String) gmrBox.getValue();
         
         // JavaFX must have a Scene (window content) inside a Stage (window)
         stage.setTitle("Scatter Chart Example");
-        final NumberAxis yAxis = new NumberAxis();
-        final CategoryAxis xAxis = new CategoryAxis();
-        
-        final LineChart lineChart = new LineChart(xAxis, yAxis);
-        root.setCenter(lineChart);
-        yAxis.setLabel("Activity change %");
-        xAxis.setLabel("Day/Month");
-        lineChart.setTitle("Google Mobility Measures");
-        
-        XYChart.Series series1 = new XYChart.Series();
-        series1.setName("Parks");
-        
-        XYChart.Series series2 = new XYChart.Series();
-        series2.setName("Transit");
         
         CovidDataLoader loader = new CovidDataLoader();
         loader.load();
@@ -127,16 +124,9 @@ public class GraphPanel extends Application
         boroughBox.getSelectionModel().selectFirst();
         boroughValue = (String) boroughBox.getValue();
         
-        for(CovidData record: records)
-        {
-           if(record.getDate().equals("2022-10-15"))
-           {
-               series1.getData().add(new XYChart.Data(record.getBorough(), record.getParksGMR())); 
-               series2.getData().add(new XYChart.Data(record.getBorough(), record.getTransitGMR())); 
-           }
-        }
-        
-        lineChart.getData().addAll(series1, series2);
+        boroughBox.setOnAction(e -> boroughClick(e));
+        generateGraph();
+
         Scene scene = new Scene(root, 600,500);
         stage.setScene(scene);
 
@@ -144,57 +134,142 @@ public class GraphPanel extends Application
         stage.show();
     }
 
-    private void buttonClick(Event event)
+    private void addSeries(ActionEvent event)
     {
-       root.setCenter(null);
-       ComboBox graphType = (ComboBox) event.getSource();
-       graphValue = (String) graphType.getValue();
-       
+        CheckMenuItem year = (CheckMenuItem) event.getSource();   
+        XYChart.Series series = new XYChart.Series();
+        series.setName(year.getText());
+        
+        if(year.isSelected())
+        {
+            yearSeries.add(series);
+        }
+        
+        if(!year.isSelected())
+        {
+           Iterator<XYChart.Series> it = yearSeries.iterator();
+           
+           while(it.hasNext())
+           {
+               XYChart.Series serie = it.next();
+               if(serie.getName().equals(series.getName()))
+               {
+                   serie.getData().clear();
+                   it.remove();
+               }
+           }
+
+        }
+        
+        generateGraph();
+    }
+    
+    private void generateGraph()
+    {
        final NumberAxis yAxis = new NumberAxis();
        final CategoryAxis xAxis = new CategoryAxis();
        yAxis.setLabel("Activity change %");
        xAxis.setLabel("Month");
        
-       XYChart.Series series1 = new XYChart.Series();
-       series1.setName("Parks");
-        
-       XYChart.Series series2 = new XYChart.Series();
-       series2.setName("Transit");
-       
        for(CovidData record: records)
        {
-           if(record.getDate().startsWith("2021") && record.getBorough().equals(boroughValue))
+           if(record.getBorough().equals(boroughValue) && record.getDate().substring(8,10).equals("15"))
            {
                int month = Integer.parseInt(record.getDate().substring(5,7));
                String monthString = new DateFormatSymbols().getMonths()[month-1];
                monthString = monthString.substring(0,3);
-               series1.getData().add(new XYChart.Data(monthString, record.getParksGMR())); 
-               series2.getData().add(new XYChart.Data(monthString, record.getTransitGMR())); 
+            
+               for(XYChart.Series series: yearSeries)
+               {
+                   /*if(!series.getData().isEmpty())
+                   {
+                       Iterator<ObservableList<XYChart.Data>> it = series.getData().iterator();
+           
+                       while(it.hasNext())
+                       {
+                           ObservableList<XYChart.Data> data = it.next();
+                           
+                           if(data.equals(new XYChart.Data(monthString, record.getParksGMR())))
+                           {
+                               it.remove();
+                           }
+                       }
+                            
+                   }*/
+                   
+                   if(series.getName().equals(record.getDate().substring(0,4)))
+                   {
+                       series.getData().add(new XYChart.Data(monthString, record.getParksGMR()));
+                   }
+                
+               }
+        
            }
        }
-
+       
        if(graphValue.equals("Bar Chart"))
        {
            final BarChart barChart = new BarChart(xAxis, yAxis);
            root.setCenter(barChart);
-           barChart.setTitle("Google Mobility Measures");    
-           barChart.getData().addAll(series1, series2);
+           barChart.setTitle("Google Mobility Measures"); 
+           
+           for(XYChart.Series series: yearSeries)
+           {
+               barChart.getData().add(series);
+           }
+           
        }
        else if(graphValue.equals("Line Graph"))
        {
            final LineChart lineChart = new LineChart(xAxis, yAxis);
            root.setCenter(lineChart);
            lineChart.setTitle("Google Mobility Measures");  
-           lineChart.getData().addAll(series1, series2);
-       }
+           
+           for(XYChart.Series series: yearSeries)
+           {
+               lineChart.getData().add(series);
+           }
+        }
        else if(graphValue.equals("Scatter Graph"))
        {
            final ScatterChart scatterChart = new ScatterChart(xAxis, yAxis);
            root.setCenter(scatterChart);
            scatterChart.setTitle("Google Mobility Measures");  
-           scatterChart.getData().addAll(series1, series2);
+           
+           for(XYChart.Series series: yearSeries)
+           {
+               scatterChart.getData().add(series);
+           }
        }
+       
+       
+    }
     
+    private void graphClick(Event event)
+    {
+       root.setCenter(null);
+       ComboBox graphType = (ComboBox) event.getSource();
+       graphValue = (String) graphType.getValue();
+       clearSeriesData();
+       generateGraph();
+    
+    }
+    
+    private void boroughClick(Event event)
+    {
+       root.setCenter(null);
+       ComboBox boroughBox = (ComboBox) event.getSource();
+       boroughValue = (String) boroughBox.getValue();
+       clearSeriesData();
+       generateGraph();    
+    }
+    
+    private void clearSeriesData()
+    {
+        for(XYChart.Series series: yearSeries)
+        {
+            series.getData().clear();
+        }
     }
 }
 
