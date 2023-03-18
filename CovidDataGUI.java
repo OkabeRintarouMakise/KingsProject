@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import javafx.stage.Stage;
+import java.util.HashSet;
 
 import javafx.scene.control.*;
 
@@ -24,6 +25,11 @@ public class CovidDataGUI extends Application
     private Stage stage;
     Button leftButton = new Button();
     Button rightButton = new Button();
+    CovidDataLoader dateFetcher  = new CovidDataLoader();
+    //private HashSet<String> dateCollection = new HashSet<>();
+    ComboBox from = new ComboBox();
+    ComboBox to = new ComboBox();
+
     
     /**
      * The start method is the main entry point for every JavaFX application. 
@@ -38,14 +44,26 @@ public class CovidDataGUI extends Application
         
         this.stage = stage;
         
-        BorderPane borderPane = new BorderPane();
-        MenuBar menu = new MenuBar();
-        HBox hbox = new HBox();
-        AnchorPane anchorPane = new AnchorPane();
+        dateFetcher.load();
+        collectionLoader(from);
+        collectionLoader(to);
         
-        borderPane.setTop(menu);
-        borderPane.setCenter(hbox);
-        borderPane.setBottom(anchorPane);
+
+        
+
+        
+        
+        BorderPane borderPane = new BorderPane();
+        HBox hbox = new HBox();
+        
+        hbox.getChildren().addAll(from, to);
+        
+        AnchorPane topAnchorPane = new AnchorPane();
+        AnchorPane bottomAnchorPane = new AnchorPane();
+        
+        borderPane.setTop(hbox);
+        borderPane.setCenter(topAnchorPane);
+        borderPane.setBottom(bottomAnchorPane);
         
         leftButton.setText("<");
         leftButton.setMaxWidth(Double.MAX_VALUE);
@@ -53,13 +71,14 @@ public class CovidDataGUI extends Application
         rightButton.setText(">");
         rightButton.setMaxWidth(Double.MAX_VALUE);
         
-        
-        
-        
         AnchorPane.setLeftAnchor(leftButton, 0d);
         AnchorPane.setRightAnchor(rightButton, 0d);
+        bottomAnchorPane.getChildren().addAll(leftButton, rightButton);
         
-        anchorPane.getChildren().addAll(leftButton, rightButton);
+        
+        
+        
+        
         
         
         
@@ -76,6 +95,21 @@ public class CovidDataGUI extends Application
         stage.setTitle("Welcome");
         // Show the Stage (window)
         stage.show();
+    }
+    
+    private void collectionLoader(ComboBox combo){
+        for(CovidData record : dateFetcher.getData()){
+            combo.getItems().add(record.getDate());
+        }
+        
+    }
+    
+    
+    private void setUpMenu(Pane parent){
+        
+        
+    
+    
     }
 
     
