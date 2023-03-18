@@ -38,13 +38,13 @@ public class CovidDataGUI extends Application
         this.stage = stage;
         
         BorderPane borderPane = new BorderPane();
-        MenuBar menu = new MenuBar();
-        HBox hbox = new HBox();
-        AnchorPane anchorPane = new AnchorPane();
+        MenuBar menuBar = new MenuBar();
+        AnchorPane topAnchorPane = new AnchorPane();
+        AnchorPane bottomAnchorPane = new AnchorPane();
         
-        borderPane.setTop(menu);
-        borderPane.setCenter(hbox);
-        borderPane.setBottom(anchorPane);
+        borderPane.setTop(menuBar);
+        borderPane.setCenter(topAnchorPane);
+        borderPane.setBottom(bottomAnchorPane);
         
         leftButton.setText("<");
         leftButton.setMaxWidth(Double.MAX_VALUE);
@@ -52,13 +52,17 @@ public class CovidDataGUI extends Application
         rightButton.setText(">");
         rightButton.setMaxWidth(Double.MAX_VALUE);
         
-        
-        
-        
         AnchorPane.setLeftAnchor(leftButton, 0d);
         AnchorPane.setRightAnchor(rightButton, 0d);
+        bottomAnchorPane.getChildren().addAll(leftButton, rightButton);
         
-        anchorPane.getChildren().addAll(leftButton, rightButton);
+        
+        
+        
+        Menu from = new Menu("From");
+        Menu to = new Menu("To");
+        
+        menuBar.getMenus().addAll(from,to);
         
         
         
@@ -75,6 +79,14 @@ public class CovidDataGUI extends Application
         stage.setTitle("Welcome");
         // Show the Stage (window)
         stage.show();
+    }
+    
+    
+    private void setUpMenu(){
+        
+    
+    
+    
     }
 
     

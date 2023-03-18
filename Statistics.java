@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Write a description of class Statistics here.
@@ -10,6 +11,7 @@ public class Statistics
 {
     ArrayList<String> statList = new ArrayList<String>();
     CovidDataLoader statisticsLoader = new CovidDataLoader();
+    ArrayList<Date> dateRange = new ArrayList<Date>();
 
     /**
      * Constructor for objects of class Statistics
