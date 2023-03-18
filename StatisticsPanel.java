@@ -25,7 +25,6 @@ public class StatisticsPanel extends Application
     Button rightButton = new Button();
     Label middleLabel = new Label(statistics.getStat(statIndex));
 
-
     /**
      * The start method is the main entry point for every JavaFX application. 
      * It is called after the init() method has returned and after 
@@ -40,6 +39,7 @@ public class StatisticsPanel extends Application
 
         leftButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         rightButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+
         leftButton.setPadding(new Insets(50, 10, 50, 10));
         rightButton.setPadding(new Insets(50, 10, 50, 10));
         leftButton.setText("<");
@@ -53,11 +53,10 @@ public class StatisticsPanel extends Application
 
         rightButton.setOnAction(this::rightButtonClick);
         leftButton.setOnAction(this::leftButtonClick);
-        
+
         bPane.setLeft(leftButton);
         bPane.setCenter(middleLabel);
         bPane.setRight(rightButton);
-
 
         // JavaFX must have a Scene (window content) inside a Stage (window)
         Scene scene = new Scene(bPane, 800, 500);
@@ -81,7 +80,7 @@ public class StatisticsPanel extends Application
         }
 
     }
-    
+
     private void leftButtonClick(ActionEvent event){
         statIndex--;
         if(statIndex > -1) {

@@ -35,6 +35,7 @@ public class CovidDataGUI extends Application
     @Override
     public void start(Stage stage)
     {
+        
         this.stage = stage;
         
         BorderPane borderPane = new BorderPane();
