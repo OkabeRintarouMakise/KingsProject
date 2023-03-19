@@ -14,7 +14,7 @@ public class Statistics
     
     //instance of the class CovidDataLoader so that we can import data
     CovidDataLoader statisticsLoader = new CovidDataLoader();
-    ArrayList<Date> dateRange = new ArrayList<Date>();
+
 
     /**
      * Constructor for objects of class Statistics

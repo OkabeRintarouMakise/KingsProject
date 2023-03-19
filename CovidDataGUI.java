@@ -11,8 +11,11 @@ import javafx.scene.layout.*;
 import javafx.stage.*;
 import javafx.stage.Stage;
 import java.util.HashSet;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.*;
 import javafx.scene.control.*;
+import javafx.geometry.Pos;
 
 /**
  * Write a description of JavaFX class CovidDataGUI here.
@@ -26,7 +29,7 @@ public class CovidDataGUI extends Application
     Button leftButton = new Button();
     Button rightButton = new Button();
     CovidDataLoader dateFetcher  = new CovidDataLoader();
-    //private HashSet<String> dateCollection = new HashSet<>();
+    private HashSet<String> dateCollection = new HashSet<>();
     ComboBox from = new ComboBox();
     ComboBox to = new ComboBox();
 
@@ -46,6 +49,8 @@ public class CovidDataGUI extends Application
         dateFetcher.load();
         collectionLoader(from);
         collectionLoader(to);
+        Label fromLabel = new Label("From");
+        Label toLabel = new Label("To");
         
 
         
@@ -54,8 +59,11 @@ public class CovidDataGUI extends Application
         
         BorderPane borderPane = new BorderPane();
         HBox hbox = new HBox();
-        
-        hbox.getChildren().addAll(from, to);
+        hbox.setAlignment(Pos.TOP_RIGHT);
+        hbox.getChildren().add(fromLabel);
+        hbox.getChildren().add(from);
+        hbox.getChildren().add(toLabel);
+        hbox.getChildren().add(to);
         
         AnchorPane topAnchorPane = new AnchorPane();
         AnchorPane bottomAnchorPane = new AnchorPane();
@@ -98,9 +106,13 @@ public class CovidDataGUI extends Application
     
     private void collectionLoader(ComboBox combo){
         for(CovidData record : dateFetcher.getData()){
-            combo.getItems().add(record.getDate());
+            dateCollection.add(record.getDate());
         }
-        
+        List<String> orderedDates = new ArrayList<String>(dateCollection);
+        Collections.sort(orderedDates);
+        for(String date: orderedDates){
+            combo.getItems().add(date);
+        }
     }
     
     
