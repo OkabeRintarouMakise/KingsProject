@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import javafx.scene.Scene;
 import javafx.scene.layout.TilePane;
 import javafx.event.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
 
 /**
  * Write a description of class mapPanel here.
@@ -15,27 +18,50 @@ import javafx.event.*;
 public class mapPanel extends Application 
 {
     private ArrayList<BoroughButton> buttonArray;
-    
+    private VBox windowPane; 
+
     public void start(Stage stage)
     {
-        TilePane topPane = new TilePane();
-        topPane.setPrefColumns(7);
-        topPane.setPrefRows(7);
+        windowPane = new VBox();
         
         setBoroughButtons();
+        constructWindowPane();
         
-        for(int i = 0; i < buttonArray.size(); i++)
-        {
-            topPane.getChildren().add(buttonArray.get(i));
-        }
-        
-        Scene scene = new Scene(topPane);
+        Scene scene = new Scene(windowPane);
         stage.setScene(scene);
         stage.show();
         
     }
     
-    public void setBoroughButtons()
+    private void constructWindowPane()
+    {
+        windowPane.getChildren().add(buttonArray.get(0));
+        
+        HBox secondLevel = new HBox();
+        HBox thirdLevel = new HBox();
+        HBox fourthLevel = new HBox();
+        HBox fifthLevel = new HBox();
+        HBox sixthLevel = new HBox();
+        HBox lastLevel = new HBox();
+
+        int i = 0;
+        for(BoroughButton button : buttonArray)
+        {
+            if(i < 4 && i > 0){secondLevel.getChildren().add(button);}            
+            if(i >= 4 && i < 11){thirdLevel.getChildren().add(button);}
+            if(i >= 11 && i < 18){fourthLevel.getChildren().add(button);}
+            if(i >= 18 && i < 24){fifthLevel.getChildren().add(button);}
+            if(i >= 24 && i < 29){sixthLevel.getChildren().add(button);}
+            if(i >= 29 && i < 33){lastLevel.getChildren().add(button);}
+            i++;
+        }
+        
+
+        windowPane.getChildren().addAll(secondLevel, thirdLevel, fourthLevel, 
+                                            fifthLevel, sixthLevel, lastLevel);
+    }
+    
+    private void setBoroughButtons()
     {
         buttonArray = new ArrayList<BoroughButton>();
         appendButton("enfi.png");
@@ -57,7 +83,7 @@ public class mapPanel extends Application
         appendButton("newh.png");
         appendButton("bark.png");
         appendButton("houn.png");
-        /*appendButton("hamm.png");
+        appendButton("hamm.png");
         appendButton("wand.png");
         appendButton("city.png");
         appendButton("gwch.png");
@@ -65,25 +91,26 @@ public class mapPanel extends Application
         appendButton("rich.png");
         appendButton("mert.png");
         appendButton("lamb.png");
-        appendButton("swth.png");
+        appendButton("sthw.png");
         appendButton("lews.png");
         appendButton("king.png");
         appendButton("sutt.png");
         appendButton("croy.png");
-        appendButton("brom.png");*/
+        appendButton("brom.png");
     }
     
-    public void appendButton(String fileName)
+    private void appendButton(String fileName)
     {
         BoroughButton button = new BoroughButton(fileName);
         button.setOnAction(this::openBoroughWindow);
         buttonArray.add(button);
     }
     
-    public void openBoroughWindow(ActionEvent event)
+    private void openBoroughWindow(ActionEvent event)
     {
         new BoroughWindow(event.getSource().toString());
     }
+
 }
 
 

@@ -35,6 +35,18 @@ public class BoroughWindow extends Application
         
         
         TableColumn<CovidData,String> dateColumn = new TableColumn<CovidData, String>("Date");
+        TableColumn<CovidData,String> retailColumn = new TableColumn<CovidData, String>("Retail and Recreation");
+        TableColumn<CovidData,String> groceryColumn = new TableColumn<CovidData, String>("Grocery and Pharmacy");
+        TableColumn<CovidData,String> parksColumn = new TableColumn<CovidData, String>("Parks");
+        TableColumn<CovidData,String> transitColumn = new TableColumn<CovidData, String>("Transit Stations");
+        TableColumn<CovidData,String> workplaceColumn = new TableColumn<CovidData, String>("Workplace");
+        TableColumn<CovidData,String> residentialColumn = new TableColumn<CovidData, String>("Residential");
+        TableColumn<CovidData,String> newCaseColumn = new TableColumn<CovidData, String>("New Covid Cases");
+        TableColumn<CovidData,String> totalCaseColumn = new TableColumn<CovidData, String>("Total Covid Cases");
+        TableColumn<CovidData,String> totalDeathColumn = new TableColumn<CovidData, String>("New Covid Deaths");
+
+        table.getColumns().setAll(dateColumn, retailColumn, groceryColumn, parksColumn, transitColumn, workplaceColumn,
+                                    residentialColumn, newCaseColumn, totalCaseColumn, totalDeathColumn);
         
         table.setItems(dataList);
         pane.setCenter(table);
