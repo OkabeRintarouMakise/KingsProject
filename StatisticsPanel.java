@@ -10,7 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.scene.layout.*;
 import java.util.ArrayList;
-
+import javafx.scene.paint.Color;
 /**
  * Write a description of JavaFX class StatisticsPanel here.
  *
@@ -40,13 +40,15 @@ public class StatisticsPanel extends Application
         leftButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         rightButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
-        leftButton.setPadding(new Insets(50, 10, 50, 10));
-        rightButton.setPadding(new Insets(50, 10, 50, 10));
+        leftButton.setPadding(new Insets(50, 20, 50, 20));
+        rightButton.setPadding(new Insets(50, 20, 50, 20));
         leftButton.setText("<");
         rightButton.setText(">");
 
         middleLabel.setPadding(new Insets(50, 50, 50, 50));
-        middleLabel.setId("midB");
+        bPane.setBackground(new Background
+        (new BackgroundFill(Color.web("98B4D4"), CornerRadii.EMPTY, Insets.EMPTY)));
+        
 
         BorderPane.setMargin(leftButton, new Insets(2,0,2,5));
         BorderPane.setMargin(rightButton, new Insets(2,5,2,0));
