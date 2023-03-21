@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.Collections;
 /**
  * Write a description of class Statistics here.
  *
@@ -10,10 +10,17 @@ import java.util.Date;
 public class Statistics
 {
     // list of all the statistics
-    ArrayList<String> statList = new ArrayList<String>();
-    
+    ArrayList<String> statList = new ArrayList<>();
+    ArrayList<CovidData> allData = new ArrayList<>();
     //instance of the class CovidDataLoader so that we can import data
     CovidDataLoader statisticsLoader = new CovidDataLoader();
+
+
+    ArrayList<Date> dateRange = new ArrayList<>();
+    private String first;
+    private String last;
+    CovidDataGUI mainGUI = new CovidDataGUI();
+  
 
 
     /**
@@ -21,7 +28,12 @@ public class Statistics
      */
     public Statistics()
     {
+        //setDates();
         statisticsLoader.load();
+
+        allData = statisticsLoader.getData();
+        Collections.sort(allData, new SortByDate());
+        
         statList.add("Total deaths in all London boroughs: \n" + loadTotalDeaths());
         statList.add("Average cases per London borough: \n" + averageCases());
         statList.add("statistic 3");
@@ -51,8 +63,15 @@ public class Statistics
     private int loadTotalDeaths(){
 
         int totalLondonDeaths = 0;
-        for(CovidData record : statisticsLoader.getData()){
-            totalLondonDeaths += record.getNewDeaths();
+        
+        for(int i = 0; i < allData.size(); i++){
+            if(first == null || last == null){
+                totalLondonDeaths += allData.get(i).getNewDeaths();
+            }
+            
+            else if(i >= allData.indexOf(first) && i <= allData.indexOf(last)){
+            totalLondonDeaths += allData.get(i).getNewDeaths();
+        }
         }
         return totalLondonDeaths;
     }
@@ -64,11 +83,24 @@ public class Statistics
     private int averageCases(){
 
         int averageCases = 0;
-        for(CovidData record : statisticsLoader.getData()){
-            averageCases += record.getNewCases();
+        
+        for(int i = 0; i < allData.size(); i++){
+            if(first == null || last == null){
+                averageCases += allData.get(i).getNewCases();
+            }
+            else if(i >= allData.indexOf(first) && i <= allData.indexOf(last)){
+            averageCases += allData.get(i).getNewCases();
         }
+        }
+        
         averageCases = averageCases / 33;
         return averageCases;
 
     }
+    /* private void setDates(){
+    first = mainGUI.getFrom();
+    last = mainGUI.getTo();
+    }
+    */
 }
+
