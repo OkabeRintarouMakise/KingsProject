@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 import java.util.*;
 import javafx.scene.control.*;
 import javafx.geometry.Pos;
@@ -33,7 +34,8 @@ public class CovidDataGUI extends Application
     ArrayList<String> orderedDates = new ArrayList<String>();
     ComboBox from = new ComboBox();
     ComboBox to = new ComboBox();
-
+    //private String currentFromValue;
+    //private String currentToValue;
     /**
      * The start method is the main entry point for every JavaFX application. 
      * It is called after the init() method has returned and after 
@@ -91,16 +93,6 @@ public class CovidDataGUI extends Application
         stage.show();
     }
 
-    /*private void collectionLoader(ComboBox combo){
-        for(CovidData record : dateFetcher.getData()){
-            orderedDates.add(record.getDate());
-        }
-        Collections.sort(orderedDates);
-        for(String date: orderedDates){
-            combo.getItems().add(date);
-        }
-    }
-    */
     private void collectionLoader(ComboBox combo){
         for(CovidData record : dateFetcher.getData()){
             dateCollection.add(record.getDate());
