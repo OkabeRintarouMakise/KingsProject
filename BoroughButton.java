@@ -1,10 +1,6 @@
 import javafx.scene.control.Button;
-import javafx.scene.image.*;
 import java.awt.Color;
 
-//import javafx.scene.image.PixelReader;
-import java.awt.image.BufferedImage;
-import javafx.embed.swing.*;
 
 /**
  * Write a description of class BoroughButtons here.
@@ -14,22 +10,18 @@ import javafx.embed.swing.*;
  */
 public class BoroughButton extends Button
 {
-    private Image image;
-    private ImageView view;
     private String name;
-    private int totalDeaths;
-
+    private int totalDeaths = 0;
+    
     /**
      * Constructor for objects of class BoroughButtons
      */
-    public BoroughButton(String filePath)
+    public BoroughButton(String boroughName)
     {
-        image = new Image(filePath);
+        this.setPrefSize(75, 75);
+        this.setText(boroughName);
+        name = boroughName;
         decideColor();
-        //filterImage(24,76);
-        name = filePath.substring(0,4);
-        view = new ImageView(image);
-        this.setGraphic(view);
     }
     
     public void setTotalDeaths(int givenDeaths)
@@ -42,40 +34,40 @@ public class BoroughButton extends Button
         switch(totalDeaths)
         {
             case 100:
-                filterImage(0,255);
+                filterImage("00FF00");
                 break;
             case 200:
-                filterImage(20,235);
+                filterImage("14EB00");
                 break;
             case 300:
-                filterImage(40,215);
+                filterImage("28D700");
                 break;
             case 400:
-                filterImage(60,195);
+                filterImage("3CC300");
                 break;
             case 500:
-                filterImage(80,175);
+                filterImage("50AF00");
                 break;
             case 600:
-                filterImage(100,155);
+                filterImage("649B00");
                 break;
             case 700:
-                filterImage(120,135);
+                filterImage("788700");
                 break;
             case 800:
-                filterImage(140,115);
+                filterImage("8C7300");
                 break;
             case 900:
-                filterImage(160,95);
+                filterImage("A05F00");
                 break;
             case 1000:
-                filterImage(180,75);
+                filterImage("B44B00");
                 break;
             case 1100:
-                filterImage(200,55);
+                filterImage("C83700");
                 break;
             case 1200:
-                filterImage(220,35);
+                filterImage("DC2300");
                 break;
             default:
                 return;
@@ -84,24 +76,11 @@ public class BoroughButton extends Button
         }
         
 
-    }    
+    }  
 
-    private void filterImage(int red, int green)
+    private void filterImage(String rgbValue)
     {
-        BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
-        for(int i = 0;i < bImage.getWidth(); i++)
-        {
-            for(int j = 0;j < bImage.getHeight(); j++)
-            {   
-                Color color = new Color(bImage.getRGB(i, j));
-                if(!(color.getRed() == 255 && color.getGreen() == 255 && color.getBlue() == 255))
-                {
-                    Color newColor = new Color(red, green, 0);
-                    bImage.setRGB(i, j, newColor.getRGB());
-                }
-            }
-        }
-        image = SwingFXUtils.toFXImage(bImage, null);
+        this.setStyle("-fx-background-color:#" + rgbValue);
     }
     
     public String toString()

@@ -1,0 +1,7 @@
+.button
+{
+    -fx-shape: "M 100 300 L 150 400 L 300 400 L 350 300 L 300 200 L 150 200 L 100 300  z";
+    -fx-padding: 15px;
+    -fx-border-radius: 3px;
+    -fx-border-color:#000000;
+}
