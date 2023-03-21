@@ -50,8 +50,8 @@ public class CovidDataGUI extends Application
         this.stage = stage;
 
         dateFetcher.load();
-        collectionLoader(from);
-        collectionLoader(to);
+        dateAddition(from);
+        dateAddition(to);
         Label fromLabel = new Label("From");
         Label toLabel = new Label("To");
 
@@ -104,6 +104,12 @@ public class CovidDataGUI extends Application
         }
     }
     
+    private void dateAddition (ComboBox combo)
+    {
+        
+    }
+    
+    
     
     private void dropDownBoxConditions()
     {
@@ -133,6 +139,16 @@ public class CovidDataGUI extends Application
     {
         leftButton.setDisable(state);
         rightButton.setDisable(state);
+    }
+    
+    public String getFrom()
+    {
+        return (String) from.getValue();
+    }
+    
+    public String getTo()
+    {
+        return (String) to.getValue();
     }
 
 }
