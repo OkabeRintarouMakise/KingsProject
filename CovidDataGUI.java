@@ -17,6 +17,7 @@ import java.util.*;
 import javafx.scene.control.*;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert.AlertType;
+import javafx.event.Event;
 
 /**
  * Write a description of JavaFX class CovidDataGUI here.
@@ -50,12 +51,16 @@ public class CovidDataGUI extends Application
         this.stage = stage;
 
         dateFetcher.load();
-        dateAddition(from);
-        dateAddition(to);
+        addSet();
+        collectionLoader(from);
+        collectionLoader(to);
         Label fromLabel = new Label("From");
         Label toLabel = new Label("To");
-
         
+        from.setOnAction(this::dropDownBoxConditions);
+        to.setOnAction(this::dropDownBoxConditions);
+        
+
         
         BorderPane borderPane = new BorderPane();
         HBox hbox = new HBox();
@@ -77,14 +82,13 @@ public class CovidDataGUI extends Application
 
         rightButton.setText(">");
         rightButton.setMaxWidth(Double.MAX_VALUE);
-        
+
         disableButtons(true);
 
         AnchorPane.setLeftAnchor(leftButton, 0d);
         AnchorPane.setRightAnchor(rightButton, 0d);
         bottomAnchorPane.getChildren().addAll(leftButton, rightButton);
 
-        
         // JavaFX must have a Scene (window content) inside a Stage (window)
         Scene scene = new Scene(borderPane, 550, 400);
         stage.setScene(scene);
@@ -94,36 +98,40 @@ public class CovidDataGUI extends Application
     }
 
     private void collectionLoader(ComboBox combo){
+        for(String date: orderedDates){
+            combo.getItems().add(date);
+        }
+    }
+
+    private void addSet(){
         for(CovidData record : dateFetcher.getData()){
             dateCollection.add(record.getDate());
         }
         orderedDates.addAll(dateCollection);
         Collections.sort(orderedDates);
-        for(String date: orderedDates){
-            combo.getItems().add(date);
-        }
     }
-    
+
     private void dateAddition (ComboBox combo)
     {
-        
+
     }
+
     
-    
-    
-    private void dropDownBoxConditions()
+    private void dropDownBoxConditions(Event e)
     {
         String currentFromValue = (String) from.getValue();
         String currentToValue = (String) to.getValue();
-        if(orderedDates.indexOf(currentFromValue) > orderedDates.indexOf(currentToValue)){
-            dropDownError();
-            return;
-        }else{
-            disableButtons(false);
-        }
-        
+        if((currentFromValue != null) && (currentToValue != null) ){
+            if(orderedDates.indexOf(currentFromValue) > orderedDates.indexOf(currentToValue)){
+                dropDownError();
+                return;
+            }else{
+                disableButtons(false);
+            }
+
     }
-    
+}
+
     private void dropDownError()
     {
         Alert alert = new Alert(AlertType.ERROR);
@@ -132,20 +140,19 @@ public class CovidDataGUI extends Application
         alert.setContentText("Your From selection is greater than your To selection");
         alert.showAndWait();
     }
-    
-    
+
 
     private void disableButtons(boolean state)
     {
         leftButton.setDisable(state);
         rightButton.setDisable(state);
     }
-    
+
     public String getFrom()
     {
         return (String) from.getValue();
     }
-    
+
     public String getTo()
     {
         return (String) to.getValue();
