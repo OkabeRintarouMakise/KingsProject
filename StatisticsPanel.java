@@ -17,7 +17,7 @@ import javafx.scene.paint.Color;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class StatisticsPanel extends Application
+public class StatisticsPanel //extends Application
 {
     private int statIndex = 0;
     Statistics statistics = new Statistics();
@@ -32,8 +32,8 @@ public class StatisticsPanel extends Application
      *
      * @param  stage the primary stage for this application.
      */
-    @Override
-    public void start(Stage stage)
+    //@Override
+    public StatisticsPanel()
     { 
        
 
@@ -61,13 +61,13 @@ public class StatisticsPanel extends Application
         bPane.setRight(rightButton);
         bPane.getStylesheets().add("statisticsPanel.css");
         //JavaFX must have a Scene (window content) inside a Stage (window)
-        Scene scene = new Scene(bPane, 800, 500);
+        //Scene scene = new Scene(bPane, 800, 500);
         
-        stage.setTitle("Statistics");
-        stage.setScene(scene);
+        //stage.setTitle("Statistics");
+        //stage.setScene(scene);
 
         // Show the Stage (window)
-        stage.show();
+        //stage.show();
     }
 
     private void rightButtonClick(ActionEvent event){
