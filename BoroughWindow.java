@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import java.util.ArrayList;
 
 
 
@@ -26,7 +27,7 @@ public class BoroughWindow extends Application
     {
         dataLoader = new Statistics();
         boroughName = getBoroughFullName(givenName);
-        dataList = FXCollections.observableArrayList(dataLoader.getAllData());
+        dataList = FXCollections.observableArrayList(filterDataList(dataLoader.getAllData()));
         start(new Stage());
     }
     
@@ -69,8 +70,7 @@ public class BoroughWindow extends Application
         
         
         
-        
-        Scene scene = new Scene(pane);
+        Scene scene = new Scene(pane, 1000, 300);
         stage.setScene(scene);
         stage.setTitle(boroughName);
         stage.show();
@@ -151,6 +151,17 @@ public class BoroughWindow extends Application
         
         }
     }
-    
+    public ArrayList<CovidData> filterDataList(ArrayList<CovidData> dataListToFilter)
+    {
+        ArrayList<CovidData> dataListTemp = new ArrayList<CovidData>();
+        for(CovidData data: dataListToFilter)
+        {
+            if(data.getBorough().equals(boroughName))
+            {
+                dataListTemp.add(data);
+            }
+        }
+        return dataListTemp;
+    }
     
 }
