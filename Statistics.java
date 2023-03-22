@@ -34,7 +34,8 @@ public class Statistics
         statList.add("Average cases per London borough: \n" + averageCases());
         statList.add("Average parks GMR: \n" + averageParksGMR() + "%");
         statList.add("Average Workplaces GMR: \n" + averageWorkplacesGMR() + "%");
-        statList.add("This date has the highest \n number of total deaths \n" + getHighestDeathDate());
+        statList.add("This date has the highest \n number of total deaths \n"
+        + getHighestDeathDate());
 
     }
 
@@ -129,18 +130,15 @@ public class Statistics
     }
 
     private String getHighestDeathDate(){
-        ArrayList<Integer> arrayList = new ArrayList<>();
+        CovidData maxValue = null;
+        int maxDeaths = 0;
         for(CovidData data: allData){
-            arrayList.add(data.getTotalDeaths());
-        }
-
-        for(CovidData data: allData){
-            int i = Collections.max(arrayList);
-            if(data.getTotalDeaths() == i){
-                return data.getDate();
+            if(data.getTotalDeaths() > maxDeaths){
+            maxDeaths = data.getTotalDeaths();
+            maxValue = data;
             }
         }
-        return "";
+        return maxValue.getDate();
     }
 
     private void setDates(){
