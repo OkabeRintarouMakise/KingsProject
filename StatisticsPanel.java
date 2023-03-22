@@ -17,14 +17,14 @@ import javafx.scene.paint.Color;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class StatisticsPanel extends Application
+public class StatisticsPanel //extends Application
 {
     private int statIndex = 0;
     Statistics statistics = new Statistics();
     Button leftButton = new Button();
     Button rightButton = new Button();
     Label middleLabel = new Label(statistics.getStat(statIndex));
-
+    BorderPane bPane = new BorderPane();
     /**
      * The start method is the main entry point for every JavaFX application. 
      * It is called after the init() method has returned and after 
@@ -32,10 +32,10 @@ public class StatisticsPanel extends Application
      *
      * @param  stage the primary stage for this application.
      */
-    @Override
-    public void start(Stage stage)
+    //@Override
+    public StatisticsPanel()
     {
-        BorderPane bPane = new BorderPane();
+       
 
         leftButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         rightButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -47,7 +47,7 @@ public class StatisticsPanel extends Application
 
         middleLabel.setPadding(new Insets(50, 50, 50, 50));
         bPane.setBackground(new Background
-        (new BackgroundFill(Color.web("98B4D4"), CornerRadii.EMPTY, Insets.EMPTY)));
+        (new BackgroundFill(Color.web("CFFCFF"), CornerRadii.EMPTY, Insets.EMPTY)));
         
 
         BorderPane.setMargin(leftButton, new Insets(2,0,2,5));
@@ -59,15 +59,15 @@ public class StatisticsPanel extends Application
         bPane.setLeft(leftButton);
         bPane.setCenter(middleLabel);
         bPane.setRight(rightButton);
-
+        bPane.getStylesheets().add("statisticsPanel.css");
         // JavaFX must have a Scene (window content) inside a Stage (window)
-        Scene scene = new Scene(bPane, 800, 500);
-        scene.getStylesheets().add("statisticsPanel.css");
-        stage.setTitle("Statistics");
-        stage.setScene(scene);
+        //Scene scene = new Scene(bPane, 800, 500);
+        
+        //stage.setTitle("Statistics");
+        //stage.setScene(scene);
 
         // Show the Stage (window)
-        stage.show();
+        //stage.show();
     }
 
     private void rightButtonClick(ActionEvent event){
@@ -95,5 +95,8 @@ public class StatisticsPanel extends Application
         }
 
     }
-
+    
+    public Pane getMainPane(){
+        return bPane;
+    }
 }
