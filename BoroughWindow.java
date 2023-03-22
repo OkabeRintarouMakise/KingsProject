@@ -107,7 +107,7 @@ public class BoroughWindow extends Application
             case "eali":
                 return "Ealing";
             case "kens":
-                return "Kensington and Chelsea";
+                return "Kensington And Chelsea";
             case "wstm":
                 return "Westminster";
             case "towh":
@@ -115,21 +115,21 @@ public class BoroughWindow extends Application
             case "newh":
                 return "Newham";
             case "bark":
-                return "Barking and Dagenham";
+                return "Barking And Dagenham";
             case "houn":
                 return "Hounslow";
             case "hamm":
-                return "Hammersmith and Fulham";
+                return "Hammersmith And Fulham";
             case "wand":
                 return "Wandsworth";
             case "city":
-                return "City of Londons";
+                return "City Of London";
             case "gwch":
                 return "Greenwich";
             case "bexl":
                 return "Bexley";
             case "rich":
-                return "Richmond upon Thames";
+                return "Richmond Upon Thames";
             case "mert":
                 return "Merton";
             case "lamb":
@@ -139,7 +139,7 @@ public class BoroughWindow extends Application
             case "lews":
                 return "Lewisham";
             case "king":
-                return "Kingston upon Thames";
+                return "Kingston Upon Thames";
             case "sutt":
                 return "Sutton";
             case "croy":
@@ -151,9 +151,11 @@ public class BoroughWindow extends Application
         
         }
     }
+    
     public ArrayList<CovidData> filterDataList(ArrayList<CovidData> dataListToFilter)
     {
         ArrayList<CovidData> dataListTemp = new ArrayList<CovidData>();
+        
         for(CovidData data: dataListToFilter)
         {
             if(data.getBorough().equals(boroughName))
@@ -161,6 +163,16 @@ public class BoroughWindow extends Application
                 dataListTemp.add(data);
             }
         }
+        
+        
+        for(CovidData data: dataListToFilter)
+        {
+            if(data.getBorough().equals(boroughName))
+            {
+                dataListTemp.add(data);
+            }
+        }
+        
         return dataListTemp;
     }
     
