@@ -36,8 +36,8 @@ public class CovidDataGUI extends Application
     ComboBox from = new ComboBox();
     ComboBox to = new ComboBox();
     MapPanel panel2 = new MapPanel();
-    StatisticsPanel panel3 = new StatisticsPanel();
-    GraphPanel panel4 = new GraphPanel();
+    //StatisticsPanel panel3 = new StatisticsPanel();
+    //GraphPanel panel4 = new GraphPanel();
     private int counter = 0;
     BorderPane borderPane = new BorderPane();
     AnchorPane topAnchorPane = new AnchorPane();
@@ -85,6 +85,7 @@ public class CovidDataGUI extends Application
 
         rightButton.setText(">");
         rightButton.setMaxWidth(Double.MAX_VALUE);
+        rightButton.setOnAction(this::rightButtonClick);
 
         disableButtons(true);
 
@@ -173,12 +174,11 @@ public class CovidDataGUI extends Application
             case 1:
                 borderPane.setCenter(panel2.getMainPane());
             case 2:
-                borderPane.setCenter(panel3.getMainPane());
+                //borderPane.setCenter(panel3.getMainPane());
             
-
+            
         }
-
-    
+        counter++;
     }
 
 }
