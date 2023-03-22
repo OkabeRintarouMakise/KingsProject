@@ -22,7 +22,7 @@ public class MapPanel
     private VBox windowPane; 
     private ArrayList<String> dateList;
 
-    public MapPanel(ArrayList<String> givenDataSet)
+    public MapPanel()
     {
         windowPane = new VBox();
         windowPane.setAlignment(Pos.TOP_CENTER);
@@ -32,7 +32,7 @@ public class MapPanel
         
         windowPane.getStylesheets().add(getClass().getResource("MapPanel.css").toExternalForm());
         
-        dateList = givenDataSet;
+        //dateList = givenDataSet;
     }
     
     /*public void start(Stage stage)
