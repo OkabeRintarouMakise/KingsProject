@@ -96,6 +96,8 @@ public class GraphPanel extends Application
         gmrBox.getSelectionModel().selectFirst();
         gmrValue = (String) gmrBox.getValue();
         
+        gmrBox.setOnAction(e -> gmrClick(e));
+        
         // JavaFX must have a Scene (window content) inside a Stage (window)
         stage.setTitle("Scatter Chart Example");
         
@@ -205,7 +207,7 @@ public class GraphPanel extends Application
                    
                    if(series.getName().equals(record.getDate().substring(0,4)))
                    {
-                       XYChart.Data data = new XYChart.Data(monthString, record.getParksGMR());
+                       XYChart.Data data = new XYChart.Data(monthString, getGMR(record));
                        series.getData().add(data);
                    }
                }
@@ -275,6 +277,16 @@ public class GraphPanel extends Application
        generateGraph();    
     }
     
+    private void gmrClick(Event event)
+    {
+       root.setCenter(null);
+       ComboBox gmrBox = (ComboBox) event.getSource();
+       gmrValue = (String) gmrBox.getValue();
+       clearSeriesData();
+       generateGraph();
+        
+    }
+    
   
     private void clearSeriesData()
     {
@@ -290,5 +302,37 @@ public class GraphPanel extends Application
             
             series.getData().clear();
         }
+    }
+    
+    private int getGMR(CovidData record)
+    {
+        int activityChangePercentage = 0;
+        
+        if(gmrValue.equals("Grocery And Pharmacy"))
+        {
+            activityChangePercentage = record.getGroceryPharmacyGMR(); 
+        }
+        else if(gmrValue.equals("Parks"))
+        {
+            activityChangePercentage = record.getParksGMR(); 
+        }
+        else if(gmrValue.equals("Residential"))
+        {
+            activityChangePercentage = record.getResidentialGMR();     
+        }
+        else if(gmrValue.equals("Retail and Recreation"))
+        {
+            activityChangePercentage = record.getRetailRecreationGMR();     
+        }
+        else if(gmrValue.equals("Transit Stations"))
+        {
+            activityChangePercentage = record.getTransitGMR();     
+        }
+        else if(gmrValue.equals("Workplaces"))
+        {
+            activityChangePercentage = record.getWorkplacesGMR();     
+        }
+            
+        return(activityChangePercentage);
     }
 }
