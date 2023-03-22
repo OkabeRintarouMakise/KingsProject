@@ -6,6 +6,8 @@ import javafx.scene.control.TableView;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
+
 
 
 /**
@@ -18,11 +20,14 @@ public class BoroughWindow extends Application
 {
     private String boroughName;
     private ObservableList<CovidData> dataList;
+    private CovidDataLoader dataLoader;
     
     public BoroughWindow(String givenName)
     {
+        dataLoader = new CovidDataLoader();
+        dataLoader.load();
         boroughName = getBoroughFullName(givenName);
-        dataList = FXCollections.observableArrayList();
+        dataList = FXCollections.observableArrayList(dataLoader.getData());
         start(new Stage());
     }
     
@@ -45,6 +50,18 @@ public class BoroughWindow extends Application
         TableColumn<CovidData,String> totalCaseColumn = new TableColumn<CovidData, String>("Total Covid Cases");
         TableColumn<CovidData,String> totalDeathColumn = new TableColumn<CovidData, String>("New Covid Deaths");
 
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        retailColumn.setCellValueFactory(new PropertyValueFactory<>("retailRecreationGMR"));
+        groceryColumn.setCellValueFactory(new PropertyValueFactory<>("groceryPharmacyGMR"));
+        parksColumn.setCellValueFactory(new PropertyValueFactory<>("parksGMR"));
+        transitColumn.setCellValueFactory(new PropertyValueFactory<>("transitGMR"));
+        workplaceColumn.setCellValueFactory(new PropertyValueFactory<>("workplacesGMR"));
+        residentialColumn.setCellValueFactory(new PropertyValueFactory<>("residentialGMR"));
+        newCaseColumn.setCellValueFactory(new PropertyValueFactory<>("newCases"));
+        totalCaseColumn.setCellValueFactory(new PropertyValueFactory<>("totalCases"));
+        totalDeathColumn.setCellValueFactory(new PropertyValueFactory<>("totalDeaths"));
+        
+        
         table.getColumns().setAll(dateColumn, retailColumn, groceryColumn, parksColumn, transitColumn, workplaceColumn,
                                     residentialColumn, newCaseColumn, totalCaseColumn, totalDeathColumn);
         
