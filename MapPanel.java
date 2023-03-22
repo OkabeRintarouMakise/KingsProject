@@ -16,12 +16,26 @@ import javafx.geometry.Pos;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class MapPanel extends Application 
+public class MapPanel  
 {
     private ArrayList<BoroughButton> buttonArray;
     private VBox windowPane; 
+    private ArrayList<String> dateList;
 
-    public void start(Stage stage)
+    public MapPanel(ArrayList<String> givenDataSet)
+    {
+        windowPane = new VBox();
+        windowPane.setAlignment(Pos.TOP_CENTER);
+        
+        setBoroughButtons();
+        constructWindowPane();
+        
+        windowPane.getStylesheets().add(getClass().getResource("MapPanel.css").toExternalForm());
+        
+        dateList = givenDataSet;
+    }
+    
+    /*public void start(Stage stage)
     {
         windowPane = new VBox();
         windowPane.setAlignment(Pos.TOP_CENTER);
@@ -30,10 +44,10 @@ public class MapPanel extends Application
         constructWindowPane();
         
         Scene scene = new Scene(windowPane);
-        scene.getStylesheets().add(getClass().getResource("MapPanel.css").toExternalForm());
+        windowPane.getStylesheets().add(getClass().getResource("MapPanel.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
-    }
+    }*/
     
     private void constructWindowPane()
     {
@@ -72,7 +86,6 @@ public class MapPanel extends Application
             i++;
         }
         
-
         windowPane.getChildren().addAll(secondLevel, thirdLevel, fourthLevel, 
                                             fifthLevel, sixthLevel, lastLevel);
     }
@@ -127,4 +140,8 @@ public class MapPanel extends Application
         new BoroughWindow(event.getSource().toString());
     }
 
+    public VBox getMainPane()
+    {
+        return windowPane;
+    }
 }
