@@ -35,8 +35,14 @@ public class CovidDataGUI extends Application
     ArrayList<String> orderedDates = new ArrayList<String>();
     ComboBox from = new ComboBox();
     ComboBox to = new ComboBox();
-    //private String currentFromValue;
-    //private String currentToValue;
+    MapPanel panel2 = new MapPanel();
+    StatisticsPanel panel3 = new StatisticsPanel();
+    GraphPanel panel4 = new GraphPanel();
+    private int counter = 0;
+    BorderPane borderPane = new BorderPane();
+    AnchorPane topAnchorPane = new AnchorPane();
+
+    //ArrayList<Pane> panelCollection = new ArrayList<Panel>();
     /**
      * The start method is the main entry point for every JavaFX application. 
      * It is called after the init() method has returned and after 
@@ -56,13 +62,12 @@ public class CovidDataGUI extends Application
         collectionLoader(to);
         Label fromLabel = new Label("From");
         Label toLabel = new Label("To");
-        
+
         from.setOnAction(this::dropDownBoxConditions);
         to.setOnAction(this::dropDownBoxConditions);
-        
 
         
-        BorderPane borderPane = new BorderPane();
+        //BorderPane borderPane = new BorderPane();
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.TOP_RIGHT);
         hbox.getChildren().add(fromLabel);
@@ -70,9 +75,7 @@ public class CovidDataGUI extends Application
         hbox.getChildren().add(toLabel);
         hbox.getChildren().add(to);
 
-        AnchorPane topAnchorPane = new AnchorPane();
         AnchorPane bottomAnchorPane = new AnchorPane();
-
         borderPane.setTop(hbox);
         borderPane.setCenter(topAnchorPane);
         borderPane.setBottom(bottomAnchorPane);
@@ -88,6 +91,12 @@ public class CovidDataGUI extends Application
         AnchorPane.setLeftAnchor(leftButton, 0d);
         AnchorPane.setRightAnchor(rightButton, 0d);
         bottomAnchorPane.getChildren().addAll(leftButton, rightButton);
+
+        
+        
+        
+        
+        
 
         // JavaFX must have a Scene (window content) inside a Stage (window)
         Scene scene = new Scene(borderPane, 550, 400);
@@ -116,7 +125,6 @@ public class CovidDataGUI extends Application
 
     }
 
-    
     private void dropDownBoxConditions(Event e)
     {
         String currentFromValue = (String) from.getValue();
@@ -129,8 +137,8 @@ public class CovidDataGUI extends Application
                 disableButtons(false);
             }
 
+        }
     }
-}
 
     private void dropDownError()
     {
@@ -140,7 +148,6 @@ public class CovidDataGUI extends Application
         alert.setContentText("Your From selection is greater than your To selection");
         alert.showAndWait();
     }
-
 
     private void disableButtons(boolean state)
     {
@@ -156,6 +163,22 @@ public class CovidDataGUI extends Application
     public String getTo()
     {
         return (String) to.getValue();
+    }
+
+    private void rightButtonClick(ActionEvent event)
+    {
+        switch(counter){
+            case 0:
+                borderPane.setCenter(topAnchorPane);
+            case 1:
+                borderPane.setCenter(panel2.getMainPane());
+            case 2:
+                borderPane.setCenter(panel3.getMainPane());
+            
+
+        }
+
+    
     }
 
 }
