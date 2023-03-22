@@ -3,7 +3,6 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.*;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
@@ -13,22 +12,23 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.geometry.Insets;
-import javafx.stage.Stage;
-import java.util.Collections;
-import java.util.Arrays;
-import java.util.ArrayList;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.CheckMenuItem;
-import java.text.DateFormatSymbols;
+import java.util.Collections;
+import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import javafx.stage.Stage;
+import javafx.geometry.Insets;
+import java.text.DateFormatSymbols;
+
 
 /**
  * Write a description of JavaFX class GraphPanel here.
@@ -167,8 +167,15 @@ public class GraphPanel extends Application
     {
        final NumberAxis yAxis = new NumberAxis();
        final CategoryAxis xAxis = new CategoryAxis();
+       String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", 
+           "Aug", "Sep", "Oct", "Nov", "Dec"}; 
+       ObservableList<String> categories = FXCollections.observableArrayList();
+       categories.addAll(months);
+       xAxis.setCategories(categories);
        yAxis.setLabel("Activity change %");
        xAxis.setLabel("Month");
+       
+       clearSeriesData();
    
        for(CovidData record: records)
        {
@@ -205,7 +212,7 @@ public class GraphPanel extends Application
         
            }
        }
-       
+      
        if(graphValue.equals("Bar Chart"))
        {
            final BarChart barChart = new BarChart(xAxis, yAxis);
@@ -217,6 +224,7 @@ public class GraphPanel extends Application
                barChart.getData().add(series);
            }
            
+           barChart.setAnimated(false);
        }
        else if(graphValue.equals("Line Graph"))
        {
@@ -228,6 +236,8 @@ public class GraphPanel extends Application
            {
                lineChart.getData().add(series);
            }
+           
+           lineChart.setAnimated(false);
         }
        else if(graphValue.equals("Scatter Graph"))
        {
@@ -239,6 +249,8 @@ public class GraphPanel extends Application
            {
                scatterChart.getData().add(series);
            }
+           
+           scatterChart.setAnimated(false);
        }
        
        
@@ -263,10 +275,19 @@ public class GraphPanel extends Application
        generateGraph();    
     }
     
+  
     private void clearSeriesData()
     {
         for(XYChart.Series series: yearSeries)
         {
+            /*if(series.getData().size() != 0)
+            {
+                for(int i = series.getData().size() - 1; i >= 0; i--)
+                {
+                    series.getData().remove(i);
+                }
+            }*/
+            
             series.getData().clear();
         }
     }
