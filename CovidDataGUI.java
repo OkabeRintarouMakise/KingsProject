@@ -82,6 +82,7 @@ public class CovidDataGUI extends Application
 
         leftButton.setText("<");
         leftButton.setMaxWidth(Double.MAX_VALUE);
+        leftButton.setOnAction(this::leftButtonClick);
 
         rightButton.setText(">");
         rightButton.setMaxWidth(Double.MAX_VALUE);
@@ -173,12 +174,24 @@ public class CovidDataGUI extends Application
                 borderPane.setCenter(topAnchorPane);
             case 1:
                 borderPane.setCenter(panel2.getMainPane());
-            case 2:
-                //borderPane.setCenter(panel3.getMainPane());
+            
             
             
         }
         counter++;
+    }
+    
+    private void leftButtonClick(ActionEvent event)
+    {
+        switch(counter){
+            case 1:
+                borderPane.setCenter(panel2.getMainPane());
+            case 0:
+                borderPane.setCenter(topAnchorPane);
+            
+            
+        }
+        counter--;
     }
 
 }
