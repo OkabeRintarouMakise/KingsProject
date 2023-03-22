@@ -21,8 +21,6 @@ public class StatisticsPanel //extends Application
 {
     private int statIndex = 0;
     Statistics statistics = new Statistics();
-    Button leftButton = new Button();
-    Button rightButton = new Button();
     Label middleLabel = new Label(statistics.getStat(statIndex));
     BorderPane bPane = new BorderPane();
     /**
@@ -35,7 +33,8 @@ public class StatisticsPanel //extends Application
     //@Override
     public StatisticsPanel()
     { 
-       
+        Button leftButton = new Button();
+        Button rightButton = new Button();
 
         leftButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
         rightButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -96,7 +95,7 @@ public class StatisticsPanel //extends Application
 
     }
     
-    public Pane getMainPane(){
+    public BorderPane getMainPane(){
         return bPane;
     }
 }

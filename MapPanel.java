@@ -35,20 +35,6 @@ public class MapPanel
         //dateList = givenDataSet;
     }
     
-    /*public void start(Stage stage)
-    {
-        windowPane = new VBox();
-        windowPane.setAlignment(Pos.TOP_CENTER);
-        
-        setBoroughButtons();
-        constructWindowPane();
-        
-        Scene scene = new Scene(windowPane);
-        windowPane.getStylesheets().add(getClass().getResource("MapPanel.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
-    }*/
-    
     private void constructWindowPane()
     {
         windowPane.getChildren().add(buttonArray.get(0));
@@ -61,7 +47,7 @@ public class MapPanel
         HBox lastLevel = new HBox();
 
         secondLevel.setAlignment(Pos.TOP_CENTER);
-        thirdLevel.setAlignment(Pos.CENTER_LEFT);
+        thirdLevel.setAlignment(Pos.CENTER);
         fourthLevel.setAlignment(Pos.CENTER);
         fifthLevel.setAlignment(Pos.CENTER);
         sixthLevel.setAlignment(Pos.BOTTOM_CENTER);

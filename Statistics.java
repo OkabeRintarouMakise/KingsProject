@@ -17,14 +17,14 @@ public class Statistics
 
     private String first;
     private String last;
-    CovidDataGUI mainGUI = new CovidDataGUI();
+    //CovidDataGUI mainGUI = new CovidDataGUI();
 
     /**
      * Constructor for objects of class Statistics
      */
     public Statistics()
     {
-        setDates();
+        //setDates();
         statisticsLoader.load();
 
         allData = statisticsLoader.getData();
@@ -141,10 +141,10 @@ public class Statistics
         return maxValue.getDate();
     }
 
-    private void setDates(){
+    /*private void setDates(){
         first = mainGUI.getFrom();
         last = mainGUI.getTo();
-    }
+    }*/
 
     public ArrayList<CovidData> getAllData()
     {

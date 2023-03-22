@@ -36,7 +36,7 @@ public class CovidDataGUI extends Application
     ComboBox from = new ComboBox();
     ComboBox to = new ComboBox();
     MapPanel panel2 = new MapPanel();
-    //StatisticsPanel panel3 = new StatisticsPanel();
+    StatisticsPanel panel3 = new StatisticsPanel();
     //GraphPanel panel4 = new GraphPanel();
     private int counter = 0;
     BorderPane borderPane = new BorderPane();
@@ -169,29 +169,43 @@ public class CovidDataGUI extends Application
 
     private void rightButtonClick(ActionEvent event)
     {
-        switch(counter){
-            case 0:
-                borderPane.setCenter(topAnchorPane);
-            case 1:
-                borderPane.setCenter(panel2.getMainPane());
-            
-            
-            
+        if(counter == 2){
+            counter = 0;
         }
-        counter++;
+        else
+        {
+            counter++;
+        }
+        if(counter == 0){
+            borderPane.setCenter(topAnchorPane);
+        }
+        else if(counter == 1){
+            borderPane.setCenter(panel2.getMainPane());
+        }
+        else if(counter == 2){
+            borderPane.setCenter(panel3.getMainPane());
+        }
     }
     
     private void leftButtonClick(ActionEvent event)
     {
-        switch(counter){
-            case 1:
-                borderPane.setCenter(panel2.getMainPane());
-            case 0:
-                borderPane.setCenter(topAnchorPane);
-            
-            
+        if(counter == 0){
+            counter = 2;
         }
-        counter--;
+        else
+        {
+            counter--;
+        }
+        if(counter == 0){
+            borderPane.setCenter(topAnchorPane);
+        }
+        else if(counter == 1){
+            borderPane.setCenter(panel2.getMainPane());
+        }
+        else if(counter == 2){
+            borderPane.setCenter(panel3.getMainPane());
+        }
+        
     }
 
 }
