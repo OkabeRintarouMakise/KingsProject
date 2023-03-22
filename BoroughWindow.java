@@ -20,14 +20,13 @@ public class BoroughWindow extends Application
 {
     private String boroughName;
     private ObservableList<CovidData> dataList;
-    private CovidDataLoader dataLoader;
+    private Statistics dataLoader;
     
     public BoroughWindow(String givenName)
     {
-        dataLoader = new CovidDataLoader();
-        dataLoader.load();
+        dataLoader = new Statistics();
         boroughName = getBoroughFullName(givenName);
-        dataList = FXCollections.observableArrayList(dataLoader.getData());
+        dataList = FXCollections.observableArrayList(dataLoader.getAllData());
         start(new Stage());
     }
     

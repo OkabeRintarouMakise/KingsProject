@@ -146,5 +146,9 @@ public class Statistics
         last = mainGUI.getTo();
     }
 
+    public ArrayList<CovidData> getAllData()
+    {
+        return allData;
+    }
 }
 
