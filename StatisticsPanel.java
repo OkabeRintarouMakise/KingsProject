@@ -98,4 +98,9 @@ public class StatisticsPanel //extends Application
     public BorderPane getMainPane(){
         return bPane;
     }
+    
+    public void updateStats()
+    {
+        statistics.addStats();
+    }
 }
