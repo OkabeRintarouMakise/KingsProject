@@ -54,8 +54,7 @@ public class Statistics
         int totalLondonDeaths = 0;
 
         for(int i = 0; i < allData.size(); i++){
-            System.out.println(allData.indexOf(main.getFromValue()));
-
+            
             if(i >= allData.indexOf(main.getFromValue()) && i <= allData.indexOf(main.getToValue())){
                 totalLondonDeaths += allData.get(i).getNewDeaths();
             }

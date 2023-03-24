@@ -120,7 +120,6 @@ public class CovidDataGUI extends Application
             }
 
         }
-        panel3.updateStats();
     }
 
     private void dropDownError()

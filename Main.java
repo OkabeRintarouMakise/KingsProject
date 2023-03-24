@@ -24,7 +24,7 @@ public class Main
     {
     
     
-}
+    }
 
     public void collectionLoader(ComboBox combo){
         for(String date: orderedDates){
