@@ -36,7 +36,7 @@ import java.text.DateFormatSymbols;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class GraphPanel extends Application
+public class GraphPanel 
 {
     private BorderPane root = new BorderPane();
     private ArrayList<CovidData> records;
@@ -46,15 +46,12 @@ public class GraphPanel extends Application
     private String graphValue;
     private String yearValue;
     
-    /**
-     * The start method is the main entry point for every JavaFX application. 
-     * It is called after the init() method has returned and after 
-     * the system is ready for the application to begin running.
-     *
-     * @param  stage the primary stage for this application.
-     */
-    @Override
-    public void start(Stage stage)
+    public GraphPanel()
+    {
+       generatePanel(); 
+    }
+    
+    public void generatePanel()
     {
         ComboBox graphTypeBox = new ComboBox();
         ComboBox gmrBox = new ComboBox();
@@ -98,9 +95,6 @@ public class GraphPanel extends Application
         
         gmrBox.setOnAction(e -> gmrClick(e));
         
-        // JavaFX must have a Scene (window content) inside a Stage (window)
-        stage.setTitle("Scatter Chart Example");
-        
         CovidDataLoader loader = new CovidDataLoader();
         loader.load();
         
@@ -128,11 +122,6 @@ public class GraphPanel extends Application
         boroughBox.setOnAction(e -> boroughClick(e));
         generateGraph();
 
-        Scene scene = new Scene(root, 600,500);
-        stage.setScene(scene);
-
-        // Show the Stage (window)
-        stage.show();
     }
 
     private void addSeries(ActionEvent event)
@@ -334,5 +323,10 @@ public class GraphPanel extends Application
         }
             
         return(activityChangePercentage);
+    }
+    
+    public BorderPane getMainPane()
+    {
+        return root;
     }
 }
