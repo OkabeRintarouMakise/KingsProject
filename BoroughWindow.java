@@ -12,9 +12,10 @@ import java.util.ArrayList;
 
 
 /**
- * Write a description of class BoroughWindow here.
+ * Loads in the window with all the appropriate data on the 
+ * certain borough. Uses a table display to potray the data
  *
- * @author (your name)
+ * @author Sebastian Habram 
  * @version (a version number or a date)
  */
 public class BoroughWindow extends Application

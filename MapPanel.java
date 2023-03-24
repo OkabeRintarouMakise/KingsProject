@@ -11,23 +11,35 @@ import javafx.scene.control.Button;
 import javafx.geometry.Pos;
 
 /**
- * Write a description of class mapPanel here.
+ * Map Panel is the second available panel to the user. It displays
+ * a map of buttons of all the London borughs and allows them to 
+ * be clicked for further functionality
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Sebastian Habram
+ * @version 24/03/2023
  */
 public class MapPanel  
 {
+    //Holds all the available boroughs that can be pressed to acces the data
     private ArrayList<BoroughButton> buttonArray;
+    
+    //Main window pane to add all buttons in correct layout, also passed into
+    //the main GUI class as a switch to be the main pane
     private VBox windowPane; 
+    
+    //
     private ArrayList<String> dateList;
 
+    
+    /** 
+     * Class constructor for Map Panel
+     */
     public MapPanel()
     {
         windowPane = new VBox();
         windowPane.setAlignment(Pos.TOP_CENTER);
         
-        setBoroughButtons();
+        createBoroughButtons();
         constructWindowPane();
         
         windowPane.getStylesheets().add(getClass().getResource("MapPanel.css").toExternalForm());
@@ -35,6 +47,10 @@ public class MapPanel
         //dateList = givenDataSet;
     }
     
+    /**
+     * Constructs the structure of the pane/window and appends
+     * all the required borough buttons
+     */
     private void constructWindowPane()
     {
         windowPane.getChildren().add(buttonArray.get(0));
@@ -76,56 +92,69 @@ public class MapPanel
                                             fifthLevel, sixthLevel, lastLevel);
     }
     
-    private void setBoroughButtons()
+    /**
+     * Creates all the required buttons  
+     */
+    private void createBoroughButtons()
     {
         buttonArray = new ArrayList<BoroughButton>();
-        appendButton("enfi");
-        appendButton("barn");
-        appendButton("hrgy");
-        appendButton("walt");
-        appendButton("hrrw");
-        appendButton("bren");
-        appendButton("camd");
-        appendButton("isli");
-        appendButton("hack");
-        appendButton("redb");
-        appendButton("have");
-        appendButton("hill");
-        appendButton("eali");
-        appendButton("kens");
-        appendButton("wstm");
-        appendButton("towh");
-        appendButton("newh");
-        appendButton("bark");
-        appendButton("houn");
-        appendButton("hamm");
-        appendButton("wand");
-        appendButton("city");
-        appendButton("gwch");
-        appendButton("bexl");
-        appendButton("rich");
-        appendButton("mert");
-        appendButton("lamb");
-        appendButton("sthw");
-        appendButton("lews");
-        appendButton("king");
-        appendButton("sutt");
-        appendButton("croy");
-        appendButton("brom");
+        instantiateButton("enfi");
+        instantiateButton("barn");
+        instantiateButton("hrgy");
+        instantiateButton("walt");
+        instantiateButton("hrrw");
+        instantiateButton("bren");
+        instantiateButton("camd");
+        instantiateButton("isli");
+        instantiateButton("hack");
+        instantiateButton("redb");
+        instantiateButton("have");
+        instantiateButton("hill");
+        instantiateButton("eali");
+        instantiateButton("kens");
+        instantiateButton("wstm");
+        instantiateButton("towh");
+        instantiateButton("newh");
+        instantiateButton("bark");
+        instantiateButton("houn");
+        instantiateButton("hamm");
+        instantiateButton("wand");
+        instantiateButton("city");
+        instantiateButton("gwch");
+        instantiateButton("bexl");
+        instantiateButton("rich");
+        instantiateButton("mert");
+        instantiateButton("lamb");
+        instantiateButton("sthw");
+        instantiateButton("lews");
+        instantiateButton("king");
+        instantiateButton("sutt");
+        instantiateButton("croy");
+        instantiateButton("brom");
     }
     
-    private void appendButton(String fileName)
+    /**
+     * Actually instantiates the buttons and appends to the array
+     */
+    private void instantiateButton(String fileName)
     {
         BoroughButton button = new BoroughButton(fileName);
         button.setOnAction(this::openBoroughWindow);
         buttonArray.add(button);
     }
     
+    /**
+     * On button click event, results in a borough window being 
+     * opened and loaded
+     */
     private void openBoroughWindow(ActionEvent event)
     {
         new BoroughWindow(event.getSource().toString());
     }
 
+    /**
+     * @return VBox main pane
+     */
     public VBox getMainPane()
     {
         return windowPane;
