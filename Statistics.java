@@ -32,7 +32,7 @@ public class Statistics
         first = main.getFromValue();
         last = main.getToValue();
         
-        
+        addStats();
     }
 
     /**
