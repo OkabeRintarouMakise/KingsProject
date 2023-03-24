@@ -30,15 +30,13 @@ public class CovidDataGUI extends Application
     private Stage stage;
     Button leftButton = new Button();
     Button rightButton = new Button();
-    
-    MapPanel panel2 = new MapPanel();
-    StatisticsPanel panel3 = new StatisticsPanel();
+    Main main = new Main();
+    MapPanel panel2;
+    StatisticsPanel panel3;
     //GraphPanel panel4 = new GraphPanel();
     private int counter = 0;
     BorderPane borderPane = new BorderPane();
     AnchorPane topAnchorPane = new AnchorPane();
-    Main main = new Main();
-
     /**
      * The start method is the main entry point for every JavaFX application. 
      * It is called after the init() method has returned and after 
@@ -49,30 +47,29 @@ public class CovidDataGUI extends Application
     @Override
     public void start(Stage stage)
     {
-
-        this.stage = stage;
         
-        main.dateFetcher.load();
-        main.addSet();
+        panel2 = new MapPanel(main);
+        panel3 = new StatisticsPanel(main);
+        
+        this.stage = stage;
         
         main.collectionLoader(main.getFrom());
         main.collectionLoader(main.getTo());
 
-        
 
         Label fromLabel = new Label("From");
         Label toLabel = new Label("To");
 
-        main.from.setOnAction(this::dropDownBoxConditions);
-        main.to.setOnAction(this::dropDownBoxConditions);
+        main.getFrom().setOnAction(this::dropDownBoxConditions);
+        main.getTo().setOnAction(this::dropDownBoxConditions);
 
         
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.TOP_RIGHT);
         hbox.getChildren().add(fromLabel);
-        hbox.getChildren().add(main.from);
+        hbox.getChildren().add(main.getFrom());
         hbox.getChildren().add(toLabel);
-        hbox.getChildren().add(main.to);
+        hbox.getChildren().add(main.getTo());
 
         AnchorPane bottomAnchorPane = new AnchorPane();
         borderPane.setTop(hbox);
@@ -92,8 +89,6 @@ public class CovidDataGUI extends Application
         AnchorPane.setLeftAnchor(leftButton, 0d);
         AnchorPane.setRightAnchor(rightButton, 0d);
         bottomAnchorPane.getChildren().addAll(leftButton, rightButton);
-
-        
         
         
         
@@ -109,10 +104,10 @@ public class CovidDataGUI extends Application
 
     private void dropDownBoxConditions(Event e)
     {
-        String currentFromValue = (String) main.from.getValue();
-        String currentToValue = (String) main.to.getValue();
+        String currentFromValue = (String) main.getFromValue();
+        String currentToValue = (String) main.getToValue();
         if((currentFromValue != null) && (currentToValue != null) ){
-            if(main.orderedDates.indexOf(currentFromValue) > main.orderedDates.indexOf(currentToValue)){
+            if(main.getDateList().indexOf(currentFromValue) > main.getDateList().indexOf(currentToValue)){
                 dropDownError();
                 return;
             }else{
@@ -120,6 +115,8 @@ public class CovidDataGUI extends Application
             }
 
         }
+        main.getRequiredDates();
+        panel3.updateStats();
     }
 
     private void dropDownError()

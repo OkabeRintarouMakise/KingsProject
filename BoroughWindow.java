@@ -22,13 +22,13 @@ public class BoroughWindow extends Application
 {
     private String boroughName;
     private ObservableList<CovidData> dataList;
-    private Statistics dataLoader;
+    private Main main;
     
-    public BoroughWindow(String givenName)
+    public BoroughWindow(String givenName, Main main)
     {
-        dataLoader = new Statistics();
+        this.main = main;
         boroughName = getBoroughFullName(givenName);
-        dataList = FXCollections.observableArrayList(filterDataList(dataLoader.getAllData()));
+        dataList = FXCollections.observableArrayList(filterDataList(main.getFilter().getDataList()));
         start(new Stage());
     }
     
@@ -156,15 +156,6 @@ public class BoroughWindow extends Application
     public ArrayList<CovidData> filterDataList(ArrayList<CovidData> dataListToFilter)
     {
         ArrayList<CovidData> dataListTemp = new ArrayList<CovidData>();
-        
-        for(CovidData data: dataListToFilter)
-        {
-            if(data.getBorough().equals(boroughName))
-            {
-                dataListTemp.add(data);
-            }
-        }
-        
         
         for(CovidData data: dataListToFilter)
         {

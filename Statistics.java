@@ -11,22 +11,20 @@ public class Statistics
 {
     // list of all the statistics
     ArrayList<String> statList = new ArrayList<>();
-    ArrayList<CovidData> allData = new ArrayList<>();
+    ArrayList<CovidData> data = new ArrayList<>();
     //instance of the class CovidDataLoader so that we can import data
-    CovidDataLoader statisticsLoader = new CovidDataLoader();
+    
 
-
-    Main main = new Main();
+    Main main;
 
     /**
      * Constructor for objects of class Statistics
      */
-    public Statistics()
+    public Statistics(Main main)
     {
-        statisticsLoader.load();
-
-        allData = statisticsLoader.getData();
-        Collections.sort(allData, new SortByDate());
+        data = main.getFilter().getDataList();
+        Collections.sort(data, new SortByDate());
+        this.main = main;
         
         addStats();
     }
@@ -53,11 +51,8 @@ public class Statistics
 
         int totalLondonDeaths = 0;
 
-        for(int i = 0; i < allData.size(); i++){
-            
-            if(i >= allData.indexOf(main.getFromValue()) && i <= allData.indexOf(main.getToValue())){
-                totalLondonDeaths += allData.get(i).getNewDeaths();
-            }
+        for(int i = 0; i < data.size(); i++){
+            totalLondonDeaths += data.get(i).getNewDeaths();
         }
         return totalLondonDeaths;
     }
@@ -70,14 +65,12 @@ public class Statistics
 
         int averageCases = 0;
 
-        for(int i = 0; i < allData.size(); i++){
-    
-            if(i >= allData.indexOf(main.getFromValue()) && i <= allData.indexOf(main.getToValue())){
-                averageCases += allData.get(i).getNewCases();
-            }
+        for(int i = 0; i < data.size(); i++){
+            averageCases += data.get(i).getNewCases();
         }
 
         averageCases = averageCases / 33;
+        System.out.println(averageCases);
         return averageCases;
 
     }
@@ -86,12 +79,11 @@ public class Statistics
 
         int averageParksGMR = 0;
 
-        for(int i = 0; i < allData.size(); i++){
-            if(i >= allData.indexOf(main.getFromValue()) && i <= allData.indexOf(main.getToValue())){
-                averageParksGMR += allData.get(i).getParksGMR();
-            }
+        for(int i = 0; i < data.size(); i++){
+            averageParksGMR += data.get(i).getParksGMR();
         }
-        averageParksGMR = averageParksGMR / allData.size();
+        
+        averageParksGMR = averageParksGMR / data.size();
         return averageParksGMR;
 
     }
@@ -100,12 +92,10 @@ public class Statistics
 
         int averageWorkplacesGMR = 0;
 
-        for(int i = 0; i < allData.size(); i++){
-            if(i >= allData.indexOf(main.getFromValue()) && i <= allData.indexOf(main.getToValue())){
-                averageWorkplacesGMR += allData.get(i).getWorkplacesGMR();
-            }
+        for(int i = 0; i < data.size(); i++){
+            averageWorkplacesGMR += data.get(i).getWorkplacesGMR();
         }
-        averageWorkplacesGMR = averageWorkplacesGMR / allData.size();
+        averageWorkplacesGMR = averageWorkplacesGMR / data.size();
         return averageWorkplacesGMR;
 
     }
@@ -113,7 +103,7 @@ public class Statistics
     private String getHighestDeathDate(){
         CovidData maxValue = null;
         int maxDeaths = 0;
-        for(CovidData data: allData){
+        for(CovidData data: data){
             if(data.getTotalDeaths() > maxDeaths){
             maxDeaths = data.getTotalDeaths();
             maxValue = data;
@@ -127,12 +117,13 @@ public class Statistics
         main.getToValue() = mainGUI.getTo();
     }*/
 
-    public ArrayList<CovidData> getAllData()
+    public ArrayList<CovidData> getData()
     {
-        return allData;
+        return data;
     }
     
     public void addStats(){
+        data = main.getFilter().getDataList();
         statList.add("Total deaths in all London boroughs: \n" + loadTotalDeaths());
             statList.add("Average cases per London borough: \n" + averageCases());
             statList.add("Average parks GMR: \n" + averageParksGMR() + "%");

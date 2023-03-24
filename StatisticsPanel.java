@@ -20,8 +20,9 @@ import javafx.scene.paint.Color;
 public class StatisticsPanel //extends Application
 {
     private int statIndex = 0;
-    Statistics statistics = new Statistics();
-    Label middleLabel = new Label(statistics.getStat(statIndex));
+    Statistics statistics;
+    Main main;
+    Label middleLabel;
     BorderPane bPane = new BorderPane();
     /**
      * The start method is the main entry point for every JavaFX application. 
@@ -31,8 +32,11 @@ public class StatisticsPanel //extends Application
      * @param  stage the primary stage for this application.
      */
     //@Override
-    public StatisticsPanel()
+    public StatisticsPanel(Main main)
     { 
+        statistics = new Statistics(main);
+        middleLabel = new Label(statistics.getStat(statIndex));
+
         Button leftButton = new Button();
         Button rightButton = new Button();
 
@@ -67,6 +71,7 @@ public class StatisticsPanel //extends Application
 
         // Show the Stage (window)
         //stage.show();
+        this.main = main;
     }
 
     private void rightButtonClick(ActionEvent event){

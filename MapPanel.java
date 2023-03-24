@@ -29,13 +29,17 @@ public class MapPanel
     
     //
     private ArrayList<String> dateList;
-
+    
+    //Reference to the main logic unit
+    private Main main;
     
     /** 
      * Class constructor for Map Panel
      */
-    public MapPanel()
+    public MapPanel(Main main)
     {
+        this.main = main;
+        
         windowPane = new VBox();
         windowPane.setAlignment(Pos.TOP_CENTER);
         
@@ -43,8 +47,6 @@ public class MapPanel
         constructWindowPane();
         
         windowPane.getStylesheets().add(getClass().getResource("MapPanel.css").toExternalForm());
-        
-        //dateList = givenDataSet;
     }
     
     /**
@@ -149,7 +151,7 @@ public class MapPanel
      */
     private void openBoroughWindow(ActionEvent event)
     {
-        new BoroughWindow(event.getSource().toString());
+        new BoroughWindow(event.getSource().toString(), main);
     }
 
     /**
