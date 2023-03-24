@@ -324,4 +324,9 @@ public class GraphPanel
             
         return(activityChangePercentage);
     }
+    
+    public BorderPane getMainPane()
+    {
+        return root;
+    }
 }
