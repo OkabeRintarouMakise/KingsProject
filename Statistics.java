@@ -17,26 +17,22 @@ public class Statistics
 
     private String first;
     private String last;
-    //CovidDataGUI mainGUI = new CovidDataGUI();
+    Main main = new Main();
 
     /**
      * Constructor for objects of class Statistics
      */
     public Statistics()
     {
-        //setDates();
         statisticsLoader.load();
 
         allData = statisticsLoader.getData();
         Collections.sort(allData, new SortByDate());
 
-        statList.add("Total deaths in all London boroughs: \n" + loadTotalDeaths());
-        statList.add("Average cases per London borough: \n" + averageCases());
-        statList.add("Average parks GMR: \n" + averageParksGMR() + "%");
-        statList.add("Average Workplaces GMR: \n" + averageWorkplacesGMR() + "%");
-        statList.add("This date has the highest \n number of total deaths \n"
-        + getHighestDeathDate());
-
+        first = main.getFromValue();
+        last = main.getToValue();
+        
+        
     }
 
     /**
@@ -62,11 +58,9 @@ public class Statistics
         int totalLondonDeaths = 0;
 
         for(int i = 0; i < allData.size(); i++){
-            if(first == null || last == null){
-                totalLondonDeaths += allData.get(i).getNewDeaths();
-            }
+            
 
-            else if(i >= allData.indexOf(first) && i <= allData.indexOf(last)){
+            if(i >= allData.indexOf(first) && i <= allData.indexOf(last)){
                 totalLondonDeaths += allData.get(i).getNewDeaths();
             }
         }
@@ -150,5 +144,16 @@ public class Statistics
     {
         return allData;
     }
+    
+    private void addStats(){
+    statList.add("Total deaths in all London boroughs: \n" + loadTotalDeaths());
+        statList.add("Average cases per London borough: \n" + averageCases());
+        statList.add("Average parks GMR: \n" + averageParksGMR() + "%");
+        statList.add("Average Workplaces GMR: \n" + averageWorkplacesGMR() + "%");
+        statList.add("This date has the highest \n number of total deaths \n"
+        + getHighestDeathDate());
+
+    }
+    
 }
 
