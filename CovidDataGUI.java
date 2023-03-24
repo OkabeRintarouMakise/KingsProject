@@ -30,19 +30,15 @@ public class CovidDataGUI extends Application
     private Stage stage;
     Button leftButton = new Button();
     Button rightButton = new Button();
-    CovidDataLoader dateFetcher  = new CovidDataLoader();
-    private HashSet<String> dateCollection = new HashSet<>();
-    ArrayList<String> orderedDates = new ArrayList<String>();
-    ComboBox from = new ComboBox();
-    ComboBox to = new ComboBox();
+    
     MapPanel panel2 = new MapPanel();
     StatisticsPanel panel3 = new StatisticsPanel();
     //GraphPanel panel4 = new GraphPanel();
     private int counter = 0;
     BorderPane borderPane = new BorderPane();
     AnchorPane topAnchorPane = new AnchorPane();
+    Main main = new Main();
 
-    //ArrayList<Pane> panelCollection = new ArrayList<Panel>();
     /**
      * The start method is the main entry point for every JavaFX application. 
      * It is called after the init() method has returned and after 
@@ -55,25 +51,28 @@ public class CovidDataGUI extends Application
     {
 
         this.stage = stage;
+        
+        main.dateFetcher.load();
+        main.addSet();
+        
+        main.collectionLoader(main.getFrom());
+        main.collectionLoader(main.getTo());
 
-        dateFetcher.load();
-        addSet();
-        collectionLoader(from);
-        collectionLoader(to);
+        
+
         Label fromLabel = new Label("From");
         Label toLabel = new Label("To");
 
-        from.setOnAction(this::dropDownBoxConditions);
-        to.setOnAction(this::dropDownBoxConditions);
+        main.from.setOnAction(this::dropDownBoxConditions);
+        main.to.setOnAction(this::dropDownBoxConditions);
 
         
-        //BorderPane borderPane = new BorderPane();
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.TOP_RIGHT);
         hbox.getChildren().add(fromLabel);
-        hbox.getChildren().add(from);
+        hbox.getChildren().add(main.from);
         hbox.getChildren().add(toLabel);
-        hbox.getChildren().add(to);
+        hbox.getChildren().add(main.to);
 
         AnchorPane bottomAnchorPane = new AnchorPane();
         borderPane.setTop(hbox);
@@ -108,31 +107,12 @@ public class CovidDataGUI extends Application
         stage.show();
     }
 
-    private void collectionLoader(ComboBox combo){
-        for(String date: orderedDates){
-            combo.getItems().add(date);
-        }
-    }
-
-    private void addSet(){
-        for(CovidData record : dateFetcher.getData()){
-            dateCollection.add(record.getDate());
-        }
-        orderedDates.addAll(dateCollection);
-        Collections.sort(orderedDates);
-    }
-
-    private void dateAddition (ComboBox combo)
-    {
-
-    }
-
     private void dropDownBoxConditions(Event e)
     {
-        String currentFromValue = (String) from.getValue();
-        String currentToValue = (String) to.getValue();
+        String currentFromValue = (String) main.from.getValue();
+        String currentToValue = (String) main.to.getValue();
         if((currentFromValue != null) && (currentToValue != null) ){
-            if(orderedDates.indexOf(currentFromValue) > orderedDates.indexOf(currentToValue)){
+            if(main.orderedDates.indexOf(currentFromValue) > main.orderedDates.indexOf(currentToValue)){
                 dropDownError();
                 return;
             }else{
@@ -157,15 +137,7 @@ public class CovidDataGUI extends Application
         rightButton.setDisable(state);
     }
 
-    public String getFrom()
-    {
-        return (String) from.getValue();
-    }
-
-    public String getTo()
-    {
-        return (String) to.getValue();
-    }
+    
 
     private void rightButtonClick(ActionEvent event)
     {
