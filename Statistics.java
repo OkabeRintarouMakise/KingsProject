@@ -60,7 +60,13 @@ public class Statistics
         for(CovidData data : data){
             LocalDate date = LocalDate.parse(data.getDate());
             if (date.isEqual(start) || date.isEqual(end) || (date.isAfter(start) && date.isBefore(end)));
+            if(data.getNewDeaths() < 0){
+            int deaths = data.getNewDeaths() * -1;
+            totalLondonDeaths += deaths;
+            }
+            else{
             totalLondonDeaths += data.getNewDeaths();
+        }
         }
     }
 
@@ -113,7 +119,7 @@ public class Statistics
         CovidData maxValue = null;
         int maxDeaths = 0;
         for(CovidData data: data){
-            if(data.getNewDeaths() > maxDeaths){
+            if(data.getTotalDeaths() > maxDeaths){
                 maxDeaths = data.getTotalDeaths();
                 maxValue = data;
             }
