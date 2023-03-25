@@ -23,6 +23,7 @@ public class Main
         dateFetcher.load();
         filter.setDataList(dateFetcher.getData());
         this.addSet();
+        
     }
 
 
