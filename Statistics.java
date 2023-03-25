@@ -7,7 +7,7 @@ import java.time.LocalDate;
 /**
  * Write a description of class Statistics here.
  *
- * @author (your name)
+ * @author Harun Abukar
  * @version (a version number or a date)
  */
 public class Statistics
@@ -141,6 +141,10 @@ public class Statistics
         statList.add("This date has the highest \n number of total deaths \n"
             + getHighestDeathDate());
 
+    }
+    
+    public void removeStats(){
+    statList.removeAll(statList);
     }
 
 }

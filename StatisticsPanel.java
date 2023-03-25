@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 /**
  * Write a description of JavaFX class StatisticsPanel here.
  *
- * @author (your name)
+ * @author Harun Abukar
  * @version (a version number or a date)
  */
 public class StatisticsPanel //extends Application
@@ -106,6 +106,7 @@ public class StatisticsPanel //extends Application
     
     public void updateStats()
     {
+        statistics.removeStats();
         statistics.addStats();
     }
 }
