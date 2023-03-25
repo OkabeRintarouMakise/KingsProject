@@ -108,5 +108,6 @@ public class StatisticsPanel //extends Application
     {
         statistics.removeStats();
         statistics.addStats();
+        middleLabel.setText(statistics.getStat(statIndex));
     }
 }
