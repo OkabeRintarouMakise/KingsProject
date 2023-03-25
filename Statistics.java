@@ -114,7 +114,7 @@ public class Statistics
         CovidData maxValue = null;
         int maxDeaths = 0;
         for(CovidData data: data){
-            if(data.getTotalDeaths() > maxDeaths){
+            if(data.getNewDeaths() > maxDeaths){
                 maxDeaths = data.getTotalDeaths();
                 maxValue = data;
             }
