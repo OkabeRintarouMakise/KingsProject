@@ -4,12 +4,12 @@ import javafx.scene.control.ComboBox;
 import java.util.Collections;
 
 /**
- * Write a description of class Main here.
+ * Write a description of class DateSelector here.
  *
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Main
+public class DateSelector
 {
     private CovidDataLoader dateFetcher  = new CovidDataLoader();
     private HashSet<String> dateCollection = new HashSet<>();
@@ -18,7 +18,7 @@ public class Main
     private ComboBox to = new ComboBox();
     private CovidDataDateFilter filter = new CovidDataDateFilter();
     
-    public Main()
+    public DateSelector()
     {
         dateFetcher.load();
         filter.setDataList(dateFetcher.getData());

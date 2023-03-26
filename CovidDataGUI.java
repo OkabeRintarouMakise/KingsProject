@@ -30,10 +30,10 @@ public class CovidDataGUI extends Application
     private Stage stage;
     Button leftButton = new Button();
     Button rightButton = new Button();
-    Main main = new Main();
+    DateSelector dateSelector = new DateSelector();
     MapPanel panel2;
     StatisticsPanel panel3;
-    //GraphPanel panel4 = new GraphPanel();
+    GraphPanel panel4 = new GraphPanel();
     private int counter = 0;
     BorderPane borderPane = new BorderPane();
     AnchorPane topAnchorPane = new AnchorPane();
@@ -47,29 +47,27 @@ public class CovidDataGUI extends Application
     @Override
     public void start(Stage stage)
     {
-        
-        panel2 = new MapPanel(main);
-        panel3 = new StatisticsPanel(main);
-        
-        this.stage = stage;
-        
-        main.collectionLoader(main.getFrom());
-        main.collectionLoader(main.getTo());
 
+        panel2 = new MapPanel(dateSelector);
+        panel3 = new StatisticsPanel(dateSelector);
+
+        this.stage = stage;
+
+        dateSelector.collectionLoader(dateSelector.getFrom());
+        dateSelector.collectionLoader(dateSelector.getTo());
 
         Label fromLabel = new Label("From");
         Label toLabel = new Label("To");
 
-        main.getFrom().setOnAction(this::dropDownBoxConditions);
-        main.getTo().setOnAction(this::dropDownBoxConditions);
+        dateSelector.getFrom().setOnAction(this::dropDownBoxConditions);
+        dateSelector.getTo().setOnAction(this::dropDownBoxConditions);
 
-        
         HBox hbox = new HBox();
         hbox.setAlignment(Pos.TOP_RIGHT);
         hbox.getChildren().add(fromLabel);
-        hbox.getChildren().add(main.getFrom());
+        hbox.getChildren().add(dateSelector.getFrom());
         hbox.getChildren().add(toLabel);
-        hbox.getChildren().add(main.getTo());
+        hbox.getChildren().add(dateSelector.getTo());
 
         AnchorPane bottomAnchorPane = new AnchorPane();
         borderPane.setTop(hbox);
@@ -89,9 +87,7 @@ public class CovidDataGUI extends Application
         AnchorPane.setLeftAnchor(leftButton, 0d);
         AnchorPane.setRightAnchor(rightButton, 0d);
         bottomAnchorPane.getChildren().addAll(leftButton, rightButton);
-        
-        
-        
+
         
 
         // JavaFX must have a Scene (window content) inside a Stage (window)
@@ -104,10 +100,10 @@ public class CovidDataGUI extends Application
 
     private void dropDownBoxConditions(Event e)
     {
-        String currentFromValue = (String) main.getFromValue();
-        String currentToValue = (String) main.getToValue();
+        String currentFromValue = (String) dateSelector.getFromValue();
+        String currentToValue = (String) dateSelector.getToValue();
         if((currentFromValue != null) && (currentToValue != null) ){
-            if(main.getDateList().indexOf(currentFromValue) > main.getDateList().indexOf(currentToValue)){
+            if(dateSelector.getDateList().indexOf(currentFromValue) > dateSelector.getDateList().indexOf(currentToValue)){
                 dropDownError();
                 return;
             }else{
@@ -115,7 +111,7 @@ public class CovidDataGUI extends Application
             }
 
         }
-        main.getRequiredDates();
+        dateSelector.getRequiredDates();
         panel3.updateStats();
     }
 
@@ -134,11 +130,10 @@ public class CovidDataGUI extends Application
         rightButton.setDisable(state);
     }
 
-    
 
     private void rightButtonClick(ActionEvent event)
     {
-        if(counter == 2){
+        if(counter == 3){
             counter = 0;
         }
         else
@@ -154,12 +149,15 @@ public class CovidDataGUI extends Application
         else if(counter == 2){
             borderPane.setCenter(panel3.getMainPane());
         }
+        else if(counter == 3){
+            borderPane.setCenter(panel4.getMainPane());
+        }
     }
-    
+
     private void leftButtonClick(ActionEvent event)
     {
         if(counter == 0){
-            counter = 2;
+            counter = 3;
         }
         else
         {
@@ -174,7 +172,10 @@ public class CovidDataGUI extends Application
         else if(counter == 2){
             borderPane.setCenter(panel3.getMainPane());
         }
-        
+        else if(counter == 3){
+            borderPane.setCenter(panel4.getMainPane());
+
+        }
     }
 
 }

@@ -22,13 +22,13 @@ public class BoroughWindow extends Application
 {
     private String boroughName;
     private ObservableList<CovidData> dataList;
-    private Main main;
+    private DateSelector dateSelector;
     
-    public BoroughWindow(String givenName, Main main)
+    public BoroughWindow(String givenName, DateSelector dateSelector)
     {
-        this.main = main;
+        this.dateSelector = dateSelector;
         boroughName = getBoroughFullName(givenName);
-        dataList = FXCollections.observableArrayList(filterDataList(main.getFilter().getDataList()));
+        dataList = FXCollections.observableArrayList(filterDataList(dateSelector.getFilter().getDataList()));
         start(new Stage());
     }
     
