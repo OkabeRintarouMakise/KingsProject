@@ -112,13 +112,9 @@ public class Statistics
                 LocalDate date = LocalDate.parse(data.getDate());
                 if (date.isEqual(start) || date.isEqual(end) || (date.isAfter(start) && date.isBefore(end))){
                     size++;    
-                    if(data.getParksGMR() < 0){
-                        int deaths = data.getParksGMR() * -1;
-                        averageParksGMR += deaths;
-                    }
-                    else{
+                   
                         averageParksGMR += data.getParksGMR();
-                    }
+                    
                 }
             }
         }
@@ -137,14 +133,8 @@ public class Statistics
             for(CovidData data : data){
                 LocalDate date = LocalDate.parse(data.getDate());
                 if (date.isEqual(start) || date.isEqual(end) || (date.isAfter(start) && date.isBefore(end))){
-                    size++;    
-                    if(data.getWorkplacesGMR() < 0){
-                        int work = data.getWorkplacesGMR() * -1;
-                        averageWorkplacesGMR += work;
-                    }
-                    else{
-                        averageWorkplacesGMR += data.getWorkplacesGMR();
-                    }
+                    size++;  
+                    averageWorkplacesGMR += data.getWorkplacesGMR();
                 }
             }
         }
