@@ -1,13 +1,13 @@
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Collections;
 import java.time.LocalDate;
 
 /**
- * Write a description of class Statistics here.
+ * Statistics is responsible for calculating the values for each statistics and storing
+ * each statistic into an arraylist called "statList"
  *
  * @author Harun Abukar
- * @version (a version number or a date)
+ * @version 26/03/2023
  */
 public class Statistics
 {
@@ -18,7 +18,9 @@ public class Statistics
     //instance of the class CovidDataLoader so that we can import data
     DateSelector dateSelector;
     /**
-     * Constructor for objects of class Statistics
+     * Constructor for Statistics
+     * loads the collection of covid data then sorts the data in increasing date order
+     * statistics added to arraylist "statlist"
      */
     public Statistics(DateSelector dateSelector)
     {
@@ -30,8 +32,8 @@ public class Statistics
     }
 
     /**
-     * An example of a method - replace this comment with your own
-
+     * @return an entry in statList using @param index
+     *
      */
     public String getStat(int index){
         return statList.get(index);
@@ -45,7 +47,7 @@ public class Statistics
     }
 
     /**
-    @return the total number of deaths in London during the time period
+     * @return the total number of deaths in London during the time period
      */
     private int loadTotalDeaths(){
         int totalLondonDeaths = 0;
@@ -54,12 +56,14 @@ public class Statistics
                 totalLondonDeaths += data.getTotalDeaths();
             }
         }
+        if(totalLondonDeaths <= 0){
+            totalLondonDeaths = 0;
+        }
         return totalLondonDeaths;
     }
 
     /**
-    @return the number of average cases in all London boroughs
-    during the time period
+     * @return the number of average cases in all London boroughs
      */
     private int averageCases(){
         int averageCases = 0;
@@ -72,6 +76,10 @@ public class Statistics
         return averageCases;
     }
 
+    /**
+     * @return the percentage change in the parks google mobility measure
+     * during the time period
+     */
     private int averageParksGMR(){
         int averageParksGMR = 0;
         int size = 0;
@@ -94,6 +102,10 @@ public class Statistics
         return averageParksGMR;
     }
 
+    /**
+     * @return the percentage change in the workplaces google mobility measure
+     * during the time period
+     */
     private int averageWorkplacesGMR(){
         int averageWorkplacesGMR = 0;
         int size = 0;
@@ -114,16 +126,25 @@ public class Statistics
         return averageWorkplacesGMR;
     }
 
+    /**
+     * @return the date with the highest number of covid deaths up to date, which is the
+     * latest date selected
+     */
     private String getHighestDeathDate(){
         return dateSelector.getToValue();
     }
 
-
+    /**
+     * @return the arraylist of all the covid data
+     */
     public ArrayList<CovidData> getData()
     {
         return data;
     }
 
+    /**
+     * initialise arraylist "statlist" by adding the statistics 
+     */
     public void addStats(){
         data = dateSelector.getFilter().getDataList();
         statList.add("Total deaths in all London boroughs: \n" + loadTotalDeaths());
@@ -134,7 +155,9 @@ public class Statistics
             + getHighestDeathDate());
 
     }
-
+    /**
+     * remove all entries from arraylist "statlist"
+     */
     public void removeStats(){
         statList.removeAll(statList);
     }
