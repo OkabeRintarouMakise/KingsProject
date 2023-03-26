@@ -21,7 +21,7 @@ public class StatisticsPanel //extends Application
 {
     private int statIndex = 0;
     Statistics statistics;
-    Main main;
+    DateSelector dateSelector;
     Label middleLabel;
     BorderPane bPane = new BorderPane();
     /**
@@ -32,9 +32,9 @@ public class StatisticsPanel //extends Application
      * @param  stage the primary stage for this application.
      */
     //@Override
-    public StatisticsPanel(Main main)
+    public StatisticsPanel(DateSelector dateSelector)
     { 
-        statistics = new Statistics(main);
+        statistics = new Statistics(dateSelector);
         middleLabel = new Label(statistics.getStat(statIndex));
 
         Button leftButton = new Button();
@@ -71,7 +71,7 @@ public class StatisticsPanel //extends Application
 
         // Show the Stage (window)
         //stage.show();
-        this.main = main;
+        this.dateSelector = dateSelector;
     }
 
     private void rightButtonClick(ActionEvent event){

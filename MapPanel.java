@@ -31,14 +31,14 @@ public class MapPanel
     private ArrayList<String> dateList;
     
     //Reference to the main logic unit
-    private Main main;
+    private DateSelector dateSelector;
     
     /** 
      * Class constructor for Map Panel
      */
-    public MapPanel(Main main)
+    public MapPanel(DateSelector dateSelector)
     {
-        this.main = main;
+        this.dateSelector = dateSelector;
         
         windowPane = new VBox();
         windowPane.setAlignment(Pos.TOP_CENTER);
@@ -151,7 +151,7 @@ public class MapPanel
      */
     private void openBoroughWindow(ActionEvent event)
     {
-        new BoroughWindow(event.getSource().toString(), main);
+        new BoroughWindow(event.getSource().toString(), dateSelector);
     }
 
     /**
