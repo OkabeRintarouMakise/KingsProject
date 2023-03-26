@@ -1,0 +1,40 @@
+.root {
+    -fx-padding: 10px;
+    -fx-background-image: url("Coronavirus.png");
+}
+.chart-plot-background {
+    -fx-border-color: black;
+    -fx-border-width: 4px;
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: transparent;
+}
+
+.chart-horizontal-grid-lines {
+    -fx-stroke: transparent;
+}
+
+.chart-title {
+    -fx-text-fill: white;
+}
+
+.axis:top {
+    -fx-border-color: transparent;
+}
+
+.axis:bottom {
+    -fx-border-color: transparent;
+}
+
+.axis:left {
+    -fx-border-color: transparent;
+}
+
+.axis:right {
+    -fx-border-color: transparent;
+}
+
+.axis-label {
+    -fx-text-fill: white;
+}
