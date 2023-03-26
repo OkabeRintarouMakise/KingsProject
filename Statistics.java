@@ -48,26 +48,12 @@ public class Statistics
     @return the total number of deaths in London during the time period
      */
     private int loadTotalDeaths(){
-
         int totalLondonDeaths = 0;
-        if(dateSelector.getFromValue() != null && dateSelector.getToValue() != null){
-            LocalDate start = LocalDate.parse(dateSelector.getFromValue());
-            LocalDate end = LocalDate.parse(dateSelector.getToValue());
-
-            for(CovidData data : data){
-                LocalDate date = LocalDate.parse(data.getDate());
-                if (date.isEqual(start) || date.isEqual(end) || (date.isAfter(start) && date.isBefore(end))){
-                    if(data.getNewDeaths() < 0){
-                        int deaths = data.getNewDeaths() * -1;
-                        totalLondonDeaths += deaths;
-                    }
-                    else{
-                        totalLondonDeaths += data.getNewDeaths();
-                    }
-                }
+        for(CovidData data : data){
+            if(data.getDate().equals(dateSelector.getToValue())){
+                totalLondonDeaths += data.getTotalDeaths();
             }
         }
-
         return totalLondonDeaths;
     }
 
@@ -76,30 +62,14 @@ public class Statistics
     during the time period
      */
     private int averageCases(){
-
         int averageCases = 0;
-
-        if(dateSelector.getFromValue() != null && dateSelector.getToValue() != null){
-            LocalDate start = LocalDate.parse(dateSelector.getFromValue());
-            LocalDate end = LocalDate.parse(dateSelector.getToValue());
-
-            for(CovidData data : data){
-                LocalDate date = LocalDate.parse(data.getDate());
-                if (date.isEqual(start) || date.isEqual(end) || (date.isAfter(start) && date.isBefore(end))){
-                    if(data.getNewDeaths() < 0){
-                        int deaths = data.getNewCases() * -1;
-                        averageCases += deaths;
-                    }
-                    else{
-                        averageCases += data.getNewCases();
-                    }
-                }
+        for(CovidData data : data){
+            if(data.getDate().equals(dateSelector.getToValue())){
+                averageCases += data.getTotalCases();
             }
         }
-
         averageCases = averageCases / 33;
         return averageCases;
-
     }
 
     private int averageParksGMR(){
@@ -112,9 +82,9 @@ public class Statistics
                 LocalDate date = LocalDate.parse(data.getDate());
                 if (date.isEqual(start) || date.isEqual(end) || (date.isAfter(start) && date.isBefore(end))){
                     size++;    
-                   
-                        averageParksGMR += data.getParksGMR();
-                    
+
+                    averageParksGMR += data.getParksGMR();
+
                 }
             }
         }
@@ -145,21 +115,9 @@ public class Statistics
     }
 
     private String getHighestDeathDate(){
-        CovidData maxValue = null;
-        int maxDeaths = 0;
-        for(CovidData data: data){
-            if(data.getTotalDeaths() > maxDeaths){
-                maxDeaths = data.getTotalDeaths();
-                maxValue = data;
-            }
-        }
-        return maxValue.getDate();
+        return dateSelector.getToValue();
     }
 
-    /*private void setDates(){
-    dateSelector.getFromValue() = dateSelectorGUI.getFrom();
-    dateSelector.getToValue() = dateSelectorGUI.getTo();
-    }*/
 
     public ArrayList<CovidData> getData()
     {
