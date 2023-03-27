@@ -63,8 +63,8 @@ public class CovidDataGUI extends Application
         dateSelector.collectionLoader(dateSelector.getTo());
         
         //Creation of Drop Down Box Labels
-        Label fromLabel = new Label("From");
-        Label toLabel = new Label("To");
+        Label fromLabel = new Label("From : ");
+        Label toLabel = new Label(" To : ");
         
         //Using DateSelector object, current from and to values are selected
         //from the class and linked to their conditions via setOnAction()
