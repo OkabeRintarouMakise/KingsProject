@@ -31,7 +31,6 @@ public class BoroughButton extends Button
     
     /**
      * Sets the total deaths of the borough in a given period of time
-     * @param givenDeaths The total number of deaths
      */
     public void setTotalDeaths(int givenDeaths)
     {
@@ -87,8 +86,6 @@ public class BoroughButton extends Button
         
         
         }
-        
-
     }  
 
     /**
