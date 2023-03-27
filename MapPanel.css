@@ -5,3 +5,8 @@
     -fx-border-radius: 3px;
     -fx-border-color:#000000;
 }
+
+.label
+{
+    -fx-font: 16px "Serif";
+}

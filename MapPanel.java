@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 
 /**
  * Map Panel is the second available panel to the user. It displays
@@ -64,6 +65,13 @@ public class MapPanel
         HBox sixthLevel = new HBox();
         HBox lastLevel = new HBox();
 
+        Label legend = new Label();
+        legend.setAlignment(Pos.CENTER);
+        legend.setText("White <100 Total Deaths \n" +
+                       "Light Green to Green 100-700 \n"+
+                       "Orange/Brown 800-1000 \n" +
+                       "Red 900-1200 \n");
+                       
         secondLevel.setAlignment(Pos.TOP_CENTER);
         thirdLevel.setAlignment(Pos.CENTER);
         fourthLevel.setAlignment(Pos.CENTER);
@@ -92,6 +100,7 @@ public class MapPanel
         
         windowPane.getChildren().addAll(secondLevel, thirdLevel, fourthLevel, 
                                             fifthLevel, sixthLevel, lastLevel);
+        windowPane.getChildren().add(legend);
     }
 
     /**
