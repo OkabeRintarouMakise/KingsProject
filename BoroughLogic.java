@@ -40,6 +40,26 @@ public class BoroughLogic
         return dataListTemp;
     }
     
+        /**
+     * @return ArrayList of data appropriate to the borough
+     * @param dataListToFilter ArrayList of all the data on all boroughs 
+     */
+    public int getTotalDeaths(String boroughName)
+    {
+        ArrayList<CovidData> dataListToFilter = dateSelector.getFilter().getDataList();
+        int deaths = 0;
+        
+        for(CovidData data: dataListToFilter)
+        {
+            if(data.getBorough().equals(boroughName) && data.getDate().equals(dateSelector.getFromValue()))
+            {
+                deaths = data.getTotalDeaths();
+            }
+        }
+        
+        return deaths;
+    }
+    
     /**
      * Creates all the required buttons  
      */
@@ -89,6 +109,7 @@ public class BoroughLogic
     private BoroughButton instantiateButton(String boroughName)
     {
         BoroughButton button = new BoroughButton(boroughName);
+        button.setTotalDeaths(this.getTotalDeaths(boroughName));
         button.setOnAction(this::openBoroughWindow);
         return button;
     }

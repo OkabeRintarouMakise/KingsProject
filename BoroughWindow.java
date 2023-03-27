@@ -166,24 +166,4 @@ public class BoroughWindow extends Application
         
         }
     }
-    
-    /**
-     * @return ArrayList of data appropriate to the borough
-     * @param dataListToFilter ArrayList of all the data on all boroughs 
-     */
-    /*
-    public ArrayList<CovidData> filterDataList(ArrayList<CovidData> dataListToFilter)
-    {
-        ArrayList<CovidData> dataListTemp = new ArrayList<CovidData>();
-        
-        for(CovidData data: dataListToFilter)
-        {
-            if(data.getBorough().equals(boroughName))
-            {
-                dataListTemp.add(data);
-            }
-        }
-        
-        return dataListTemp;
-    }*/
 }

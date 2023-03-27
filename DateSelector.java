@@ -18,6 +18,9 @@ public class DateSelector
     private ComboBox to = new ComboBox(); // To ComboBox created
     private CovidDataDateFilter filter = new CovidDataDateFilter();// Acquires copy of all data
     
+    /**
+     * COnstructor for Date Selector objects
+     */
     public DateSelector()
     {
         dateFetcher.load();
