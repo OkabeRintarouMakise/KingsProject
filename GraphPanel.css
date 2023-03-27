@@ -1,4 +1,4 @@
-.root {
+#root {
     -fx-padding: 10px;
     -fx-background-image: url("Coronavirus.png");
 }
@@ -28,7 +28,7 @@
 }
 
 .default-color2.chart-series-line {
-    -fx-stroke: green;
+    -fx-stroke: yellow;
 }
 
 .default-color0.chart-line-symbol {
