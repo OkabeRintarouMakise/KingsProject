@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import javafx.event.ActionEvent;
 
 /**
  * Write a description of class BoroughLogic here.
@@ -42,53 +43,63 @@ public class BoroughLogic
     /**
      * Creates all the required buttons  
      */
-    /*private ArrayList<BoroughButton> createBoroughButtons()
+    public ArrayList<BoroughButton> createBoroughButtons()
     {
         ArrayList<BoroughButton> buttonArray = new ArrayList<BoroughButton>();
-        instantiateButton("enfi");
-        instantiateButton("barn");
-        instantiateButton("hrgy");
-        instantiateButton("walt");
-        instantiateButton("hrrw");
-        instantiateButton("bren");
-        instantiateButton("camd");
-        instantiateButton("isli");
-        instantiateButton("hack");
-        instantiateButton("redb");
-        instantiateButton("have");
-        instantiateButton("hill");
-        instantiateButton("eali");
-        instantiateButton("kens");
-        instantiateButton("wstm");
-        instantiateButton("towh");
-        instantiateButton("newh");
-        instantiateButton("bark");
-        instantiateButton("houn");
-        instantiateButton("hamm");
-        instantiateButton("wand");
-        instantiateButton("city");
-        instantiateButton("gwch");
-        instantiateButton("bexl");
-        instantiateButton("rich");
-        instantiateButton("mert");
-        instantiateButton("lamb");
-        instantiateButton("sthw");
-        instantiateButton("lews");
-        instantiateButton("king");
-        instantiateButton("sutt");
-        instantiateButton("croy");
-        instantiateButton("brom");
+        buttonArray.add(instantiateButton("enfi"));
+        buttonArray.add(instantiateButton("barn"));
+        buttonArray.add(instantiateButton("hrgy"));
+        buttonArray.add(instantiateButton("walt"));
+        buttonArray.add(instantiateButton("hrrw"));
+        buttonArray.add(instantiateButton("bren"));
+        buttonArray.add(instantiateButton("camd"));
+        buttonArray.add(instantiateButton("isli"));
+        buttonArray.add(instantiateButton("hack"));
+        buttonArray.add(instantiateButton("redb"));
+        buttonArray.add(instantiateButton("have"));
+        buttonArray.add(instantiateButton("hill"));
+        buttonArray.add(instantiateButton("eali"));
+        buttonArray.add(instantiateButton("kens"));
+        buttonArray.add(instantiateButton("wstm"));
+        buttonArray.add(instantiateButton("towh"));
+        buttonArray.add(instantiateButton("newh"));
+        buttonArray.add(instantiateButton("bark"));
+        buttonArray.add(instantiateButton("houn"));
+        buttonArray.add(instantiateButton("hamm"));
+        buttonArray.add(instantiateButton("wand"));
+        buttonArray.add(instantiateButton("city"));
+        buttonArray.add(instantiateButton("gwch"));
+        buttonArray.add(instantiateButton("bexl"));
+        buttonArray.add(instantiateButton("rich"));
+        buttonArray.add(instantiateButton("mert"));
+        buttonArray.add(instantiateButton("lamb"));
+        buttonArray.add(instantiateButton("sthw"));
+        buttonArray.add(instantiateButton("lews"));
+        buttonArray.add(instantiateButton("king"));
+        buttonArray.add(instantiateButton("sutt"));
+        buttonArray.add(instantiateButton("croy"));
+        buttonArray.add(instantiateButton("brom"));
         return buttonArray;
-    }*/
+    }
     
     /**
      * Actually instantiates the buttons and appends to the array
      * @param boroughName String name of the borough 
      */
-    /*private void instantiateButton(String boroughName)
+    private BoroughButton instantiateButton(String boroughName)
     {
         BoroughButton button = new BoroughButton(boroughName);
         button.setOnAction(this::openBoroughWindow);
-        buttonArray.add(button);
-    }*/
+        return button;
+    }
+    
+    /**
+     * On button click event, results in a borough window being 
+     * opened and loaded
+     * @param event Event handler appropriate event
+     */
+    private void openBoroughWindow(ActionEvent event)
+    {
+        new BoroughWindow(event.getSource().toString(), this);
+    }
 }

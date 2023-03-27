@@ -27,9 +27,6 @@ public class MapPanel
     //the main GUI class as a switch to be the main pane
     private VBox windowPane; 
     
-    //Reference to the logic unit exclusively for boroughs
-    private BoroughLogic boroughLogic;
-    
     /** 
      * Class constructor for Map Panel
      * @param dateSelector Pointer to the main logic unit
@@ -37,12 +34,12 @@ public class MapPanel
     public MapPanel(DateSelector dateSelector)
     {
         //this.dateSelector = dateSelector;
-        boroughLogic = new BoroughLogic(dateSelector);
+        BoroughLogic boroughLogic = new BoroughLogic(dateSelector);
         
         windowPane = new VBox();
         windowPane.setAlignment(Pos.TOP_CENTER);
         
-        //buttonArray = boroughLogic.createBoroughButtons();
+        buttonArray = boroughLogic.createBoroughButtons();
         
         constructWindowPane();
         
@@ -92,16 +89,6 @@ public class MapPanel
         
         windowPane.getChildren().addAll(secondLevel, thirdLevel, fourthLevel, 
                                             fifthLevel, sixthLevel, lastLevel);
-    }
-    
-    /**
-     * On button click event, results in a borough window being 
-     * opened and loaded
-     * @param event Event handler appropriate event
-     */
-    private void openBoroughWindow(ActionEvent event)
-    {
-        new BoroughWindow(event.getSource().toString(), boroughLogic);
     }
 
     /**
