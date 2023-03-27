@@ -49,10 +49,11 @@ public class BoroughLogic
     {
         ArrayList<CovidData> dataListToFilter = dateSelector.getFilter().getDataList();
         int deaths = 0;
+        boroughName = getBoroughFullName(boroughName);
         
         for(CovidData data: dataListToFilter)
         {
-            if(data.getBorough().equals(boroughName) && data.getDate().equals(dateSelector.getFromValue()))
+            if(data.getBorough().equals(boroughName) && data.getDate().equals(dateSelector.getToValue()))
             {
                 deaths = data.getTotalDeaths();
             }
@@ -121,6 +122,86 @@ public class BoroughLogic
      */
     private void openBoroughWindow(ActionEvent event)
     {
-        new BoroughWindow(event.getSource().toString(), this);
+        new BoroughWindow(getBoroughFullName(event.getSource().toString()), this);
+    }
+    
+    /**
+     * @return Full name of the borough
+     * @param giveName Abbreviation of the full name
+     */
+    private String getBoroughFullName(String givenName)
+    {
+        switch(givenName)
+        {
+            case "enfi":
+                return "Enfield";
+            case "barn":
+                return "Barnet";
+            case "hrgy":
+                return "Haringey";
+            case "walt":
+                return "Waltham Forest";
+            case "hrrw":
+                return "Harrow";
+            case "bren":
+                return "Brent";
+            case "camd":
+                return "Camden";
+            case "isli":
+                return "Islington";
+            case "hack":
+                return "Hackney";
+            case "redb":
+                return "Redbridge";
+            case "have":
+                return "Havering";
+            case "hill":
+                return "Hillingdon";
+            case "eali":
+                return "Ealing";
+            case "kens":
+                return "Kensington And Chelsea";
+            case "wstm":
+                return "Westminster";
+            case "towh":
+                return "Tower Hamlets";
+            case "newh":
+                return "Newham";
+            case "bark":
+                return "Barking And Dagenham";
+            case "houn":
+                return "Hounslow";
+            case "hamm":
+                return "Hammersmith And Fulham";
+            case "wand":
+                return "Wandsworth";
+            case "city":
+                return "City Of London";
+            case "gwch":
+                return "Greenwich";
+            case "bexl":
+                return "Bexley";
+            case "rich":
+                return "Richmond Upon Thames";
+            case "mert":
+                return "Merton";
+            case "lamb":
+                return "Lambeth";
+            case "sthw":
+                return "Southwark";
+            case "lews":
+                return "Lewisham";
+            case "king":
+                return "Kingston Upon Thames";
+            case "sutt":
+                return "Sutton";
+            case "croy":
+                return "Croydon";
+            case "brom":
+                return "Bromley";
+            default:
+                return givenName;
+        
+        }
     }
 }

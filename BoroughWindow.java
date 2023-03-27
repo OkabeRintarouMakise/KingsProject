@@ -33,7 +33,7 @@ public class BoroughWindow extends Application
      */
     public BoroughWindow(String givenName, BoroughLogic boroughLogic)
     {
-        boroughName = getBoroughFullName(givenName);
+        boroughName = givenName;
         dataList = FXCollections.observableArrayList(boroughLogic.filterDataList(boroughName));
         start(new Stage());
     }
@@ -85,85 +85,5 @@ public class BoroughWindow extends Application
         stage.setScene(scene);
         stage.setTitle(boroughName);
         stage.show();
-    }
-
-    /**
-     * @return Full name of the borough
-     * @param giveName Abbreviation of the full name
-     */
-    private String getBoroughFullName(String givenName)
-    {
-        switch(givenName)
-        {
-            case "enfi":
-                return "Enfield";
-            case "barn":
-                return "Barnet";
-            case "hrgy":
-                return "Haringey";
-            case "walt":
-                return "Waltham Forest";
-            case "hrrw":
-                return "Harrow";
-            case "bren":
-                return "Brent";
-            case "camd":
-                return "Camden";
-            case "isli":
-                return "Islington";
-            case "hack":
-                return "Hackney";
-            case "redb":
-                return "Redbridge";
-            case "have":
-                return "Havering";
-            case "hill":
-                return "Hillingdon";
-            case "eali":
-                return "Ealing";
-            case "kens":
-                return "Kensington And Chelsea";
-            case "wstm":
-                return "Westminster";
-            case "towh":
-                return "Tower Hamlets";
-            case "newh":
-                return "Newham";
-            case "bark":
-                return "Barking And Dagenham";
-            case "houn":
-                return "Hounslow";
-            case "hamm":
-                return "Hammersmith And Fulham";
-            case "wand":
-                return "Wandsworth";
-            case "city":
-                return "City Of London";
-            case "gwch":
-                return "Greenwich";
-            case "bexl":
-                return "Bexley";
-            case "rich":
-                return "Richmond Upon Thames";
-            case "mert":
-                return "Merton";
-            case "lamb":
-                return "Lambeth";
-            case "sthw":
-                return "Southwark";
-            case "lews":
-                return "Lewisham";
-            case "king":
-                return "Kingston Upon Thames";
-            case "sutt":
-                return "Sutton";
-            case "croy":
-                return "Croydon";
-            case "brom":
-                return "Bromley";
-            default:
-                return givenName;
-        
-        }
     }
 }

@@ -152,6 +152,7 @@ public class CovidDataGUI extends Application
 
         }
         dateSelector.getRequiredDates();
+        panel2.updateButtons();
         panel3.updateStats();
     }
     

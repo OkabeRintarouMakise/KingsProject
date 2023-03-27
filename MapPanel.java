@@ -27,13 +27,15 @@ public class MapPanel
     //the main GUI class as a switch to be the main pane
     private VBox windowPane; 
     
+    private BoroughLogic boroughLogic;
+    
     /** 
      * Class constructor for Map Panel
      * @param dateSelector Pointer to the main logic unit
      */
     public MapPanel(DateSelector dateSelector)
     {
-        BoroughLogic boroughLogic = new BoroughLogic(dateSelector);
+        boroughLogic = new BoroughLogic(dateSelector);
         
         windowPane = new VBox();
         windowPane.setAlignment(Pos.TOP_CENTER);
@@ -96,5 +98,13 @@ public class MapPanel
     public VBox getMainPane()
     {
         return windowPane;
+    }
+    
+    public void updateButtons()
+    {
+        for(BoroughButton button: buttonArray)
+        {
+            button.setTotalDeaths(boroughLogic.getTotalDeaths(button.toString()));
+        }
     }
 }
