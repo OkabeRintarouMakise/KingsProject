@@ -27,23 +27,23 @@ public class MapPanel
     //the main GUI class as a switch to be the main pane
     private VBox windowPane; 
     
-    //
-    private ArrayList<String> dateList;
-    
-    //Reference to the main logic unit
-    private DateSelector dateSelector;
+    //Reference to the logic unit exclusively for boroughs
+    private BoroughLogic boroughLogic;
     
     /** 
      * Class constructor for Map Panel
+     * @param dateSelector Pointer to the main logic unit
      */
     public MapPanel(DateSelector dateSelector)
     {
-        this.dateSelector = dateSelector;
+        //this.dateSelector = dateSelector;
+        boroughLogic = new BoroughLogic(dateSelector);
         
         windowPane = new VBox();
         windowPane.setAlignment(Pos.TOP_CENTER);
         
-        createBoroughButtons();
+        //buttonArray = boroughLogic.createBoroughButtons();
+        
         constructWindowPane();
         
         windowPane.getStylesheets().add(getClass().getResource("MapPanel.css").toExternalForm());
@@ -95,67 +95,17 @@ public class MapPanel
     }
     
     /**
-     * Creates all the required buttons  
-     */
-    private void createBoroughButtons()
-    {
-        buttonArray = new ArrayList<BoroughButton>();
-        instantiateButton("enfi");
-        instantiateButton("barn");
-        instantiateButton("hrgy");
-        instantiateButton("walt");
-        instantiateButton("hrrw");
-        instantiateButton("bren");
-        instantiateButton("camd");
-        instantiateButton("isli");
-        instantiateButton("hack");
-        instantiateButton("redb");
-        instantiateButton("have");
-        instantiateButton("hill");
-        instantiateButton("eali");
-        instantiateButton("kens");
-        instantiateButton("wstm");
-        instantiateButton("towh");
-        instantiateButton("newh");
-        instantiateButton("bark");
-        instantiateButton("houn");
-        instantiateButton("hamm");
-        instantiateButton("wand");
-        instantiateButton("city");
-        instantiateButton("gwch");
-        instantiateButton("bexl");
-        instantiateButton("rich");
-        instantiateButton("mert");
-        instantiateButton("lamb");
-        instantiateButton("sthw");
-        instantiateButton("lews");
-        instantiateButton("king");
-        instantiateButton("sutt");
-        instantiateButton("croy");
-        instantiateButton("brom");
-    }
-    
-    /**
-     * Actually instantiates the buttons and appends to the array
-     */
-    private void instantiateButton(String fileName)
-    {
-        BoroughButton button = new BoroughButton(fileName);
-        button.setOnAction(this::openBoroughWindow);
-        buttonArray.add(button);
-    }
-    
-    /**
      * On button click event, results in a borough window being 
      * opened and loaded
+     * @param event Event handler appropriate event
      */
     private void openBoroughWindow(ActionEvent event)
     {
-        new BoroughWindow(event.getSource().toString(), dateSelector);
+        new BoroughWindow(event.getSource().toString(), boroughLogic);
     }
 
     /**
-     * @return VBox main pane
+     * @return Main pane of the class
      */
     public VBox getMainPane()
     {

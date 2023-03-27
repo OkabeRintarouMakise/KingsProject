@@ -20,18 +20,28 @@ import java.util.ArrayList;
  */
 public class BoroughWindow extends Application
 {
+    //Name of the borough
     private String boroughName;
-    private ObservableList<CovidData> dataList;
-    private DateSelector dateSelector;
     
-    public BoroughWindow(String givenName, DateSelector dateSelector)
+    //An automatically updating list of data to be displayed
+    private ObservableList<CovidData> dataList;
+    
+    /**
+     * Constructor of Borough Window
+     * @param givenName Abbreviated name of borough 
+     * @param dateSelector Pointer to the main logic unit
+     */
+    public BoroughWindow(String givenName, BoroughLogic boroughLogic)
     {
-        this.dateSelector = dateSelector;
         boroughName = getBoroughFullName(givenName);
-        dataList = FXCollections.observableArrayList(filterDataList(dateSelector.getFilter().getDataList()));
+        dataList = FXCollections.observableArrayList(boroughLogic.filterDataList(boroughName));
         start(new Stage());
     }
     
+    /**
+     * Creates a new window with all its components to be displayed
+     * @param stage Reference to the window being shown
+     */
     @Override
     public void start(Stage stage)
     {
@@ -77,6 +87,10 @@ public class BoroughWindow extends Application
         stage.show();
     }
 
+    /**
+     * @return Full name of the borough
+     * @param giveName Abbreviation of the full name
+     */
     private String getBoroughFullName(String givenName)
     {
         switch(givenName)
@@ -153,6 +167,11 @@ public class BoroughWindow extends Application
         }
     }
     
+    /**
+     * @return ArrayList of data appropriate to the borough
+     * @param dataListToFilter ArrayList of all the data on all boroughs 
+     */
+    /*
     public ArrayList<CovidData> filterDataList(ArrayList<CovidData> dataListToFilter)
     {
         ArrayList<CovidData> dataListTemp = new ArrayList<CovidData>();
@@ -166,6 +185,5 @@ public class BoroughWindow extends Application
         }
         
         return dataListTemp;
-    }
-    
+    }*/
 }
