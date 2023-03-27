@@ -43,12 +43,13 @@ public class StatisticsPanel
         statistics = new Statistics(dateSelector);
         middleLabel = new Label(statistics.getStat(statIndex));
         bPane = new BorderPane();
+        bPane.setId("pane");
         leftButton = new Button();
         rightButton = new Button();
         
         setButtonDesign();
 
-        middleLabel.setPadding(new Insets(50, 50, 50, 50));
+        middleLabel.setPadding(new Insets(0, 50, 250, 50));
 
         BorderPane.setMargin(leftButton, new Insets(2,0,2,5));
         BorderPane.setMargin(rightButton, new Insets(2,5,2,0));
