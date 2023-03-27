@@ -130,6 +130,7 @@ public class GraphPanel
         boroughBox.setOnAction(e -> boroughClick(e));
         generateGraph();
         
+        root.setId("root");
         root.getStylesheets().add("GraphPanel.css");
 
     }
