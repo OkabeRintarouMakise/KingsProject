@@ -32,10 +32,13 @@ import java.text.DateFormatSymbols;
 
 
 /**
- * Write a description of JavaFX class GraphPanel here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * This class represents the 4th panel.
+ * For this panel, we have decided to implement a graph generator.
+ * This graph generator will display all the covid data google mobility measures (gmr),
+ * per borough, and can be filtered by the type of graph you want, the gmr you want
+ * and it will plot the activity change percentage of each gmr based on the years 2020, 2021 and 2022.
+ * @author Armaan Uddin
+ * @version 27/03/2023
  */
 public class GraphPanel
 {
@@ -252,11 +255,11 @@ public class GraphPanel
            lineChart.setAnimated(false);
            lineChart.setCreateSymbols(false);
         }
-       else if(graphValue.equals(boroughValue))
+       else if(graphValue.equals("Scatter Graph"))
        {
            final ScatterChart scatterChart = new ScatterChart(xAxis, yAxis);
            root.setCenter(scatterChart);
-           scatterChart.setTitle("Google Mobility Measures");  
+           scatterChart.setTitle(boroughValue);  
            
            for(XYChart.Series series: yearSeries)
            {
