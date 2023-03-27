@@ -81,8 +81,9 @@ public class BoroughButton extends Button
             case 1200:
                 filterImage("DC2300");
                 break;
-            default:
-                return;
+            case 0:
+                filterImage("FFFFFF");
+                break;
         
         
         }
