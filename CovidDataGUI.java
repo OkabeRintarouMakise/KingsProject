@@ -22,27 +22,24 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
-
-
 /**
- * Write a description of JavaFX class CovidDataGUI here.
- *
+ * This class creates the main BorderPane and assigns the different panes within
+ * for different purposes.
  * @author Adil Kassam,
  * @version (a version number or a date)
  */
 public class CovidDataGUI extends Application
 {
     private Stage stage;
-    Button leftButton = new Button();
+    Button leftButton = new Button(); // Left Button is created
     Button rightButton = new Button();
-    DateSelector dateSelector = new DateSelector();
-    MapPanel panel2;
+    DateSelector dateSelector = new DateSelector(); // Object of DateSelector created to access DateSelector methods
+    MapPanel panel2; // The different panes are defined here
     StatisticsPanel panel3;
-    GraphPanel panel4 = new GraphPanel();
-    private int counter = 0;
-    BorderPane borderPane = new BorderPane();
-    VBox vBox = new VBox();
+    GraphPanel panel4;
+    private int counter = 0; // Counter initialised
+    BorderPane borderPane = new BorderPane(); // Main BorderPane is created
+    VBox vBox = new VBox(); // Central VBox is created
     /**
      * The start method is the main entry point for every JavaFX application. 
      * It is called after the init() method has returned and after 
@@ -53,13 +50,15 @@ public class CovidDataGUI extends Application
     @Override
     public void start(Stage stage) throws FileNotFoundException
     {
-        //
+        //The different panels are linked with dateSelector here
         panel2 = new MapPanel(dateSelector);
         panel3 = new StatisticsPanel(dateSelector);
+        panel4 = new GraphPanel();
 
 
         this.stage = stage;
-
+        
+        //From and To ComboBoxes are loaded from DateSelector
         dateSelector.collectionLoader(dateSelector.getFrom());
         dateSelector.collectionLoader(dateSelector.getTo());
         
@@ -96,7 +95,9 @@ public class CovidDataGUI extends Application
         rightPrompt.setId("secondlabel");
         Label leftPrompt = new Label("Hit left to go back");
         leftPrompt.setId("thirdlabel");
-        vBox.getChildren().addAll( welcomeLabel, rightPrompt, leftPrompt);
+        Label boxPrompt = new Label("Choose a date range to start");
+        boxPrompt.setId("fourthlabel");
+        vBox.getChildren().addAll( welcomeLabel, rightPrompt, leftPrompt, boxPrompt);
         
         //AnchorPane for buttons created and placed
         AnchorPane bottomAnchorPane = new AnchorPane();

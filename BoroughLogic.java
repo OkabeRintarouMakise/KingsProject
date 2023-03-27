@@ -2,10 +2,11 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 
 /**
- * Write a description of class BoroughLogic here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * Handles the logic of all Borough related classes
+ *
+ * @author Sebastian Habram
+ * @version 27/03/2023
  */
 public class BoroughLogic
 {
@@ -40,7 +41,7 @@ public class BoroughLogic
         return dataListTemp;
     }
     
-        /**
+    /**
      * @return ArrayList of data appropriate to the borough
      * @param dataListToFilter ArrayList of all the data on all boroughs 
      */
@@ -109,7 +110,6 @@ public class BoroughLogic
     private BoroughButton instantiateButton(String boroughName)
     {
         BoroughButton button = new BoroughButton(boroughName);
-        button.setTotalDeaths(this.getTotalDeaths(boroughName));
         button.setOnAction(this::openBoroughWindow);
         return button;
     }

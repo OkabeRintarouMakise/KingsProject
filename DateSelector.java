@@ -2,22 +2,21 @@ import java.util.HashSet;
 import java.util.ArrayList;
 import javafx.scene.control.ComboBox;
 import java.util.Collections;
-
 /**
  * Implementation of much of the methods found in CovidDataGUI. Bulk of the class
  * deals with the acquiring and manipulating of the Date list found in CovidDataLoader
  *
- * @author Adil Kassam
- * @version (a version number or a date)
+ * @author Adil Kassam, Sebastian Habram
+ * @version 27/03/2023
  */
 public class DateSelector
 {
-    private CovidDataLoader dateFetcher  = new CovidDataLoader();
-    private HashSet<String> dateCollection = new HashSet<>();
-    private ArrayList<String> orderedDates = new ArrayList<String>();
-    private ComboBox from = new ComboBox();
-    private ComboBox to = new ComboBox();
-    private CovidDataDateFilter filter = new CovidDataDateFilter();
+    private CovidDataLoader dateFetcher  = new CovidDataLoader(); // Object created to access date list
+    private HashSet<String> dateCollection = new HashSet<>(); // HashSet created to remove repeats in date list
+    private ArrayList<String> orderedDates = new ArrayList<String>(); // ArrayList created to order dates chronologically
+    private ComboBox from = new ComboBox(); // From ComboBox created
+    private ComboBox to = new ComboBox(); // To ComboBox created
+    private CovidDataDateFilter filter = new CovidDataDateFilter();// Acquires copy of all data
     
     /**
      * COnstructor for Date Selector objects
