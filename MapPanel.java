@@ -22,10 +22,12 @@ public class MapPanel
 {
     //Holds all the available boroughs that can be pressed to acces the data
     private ArrayList<BoroughButton> buttonArray;
-    
+        
     //Main window pane to add all buttons in correct layout, also passed into
     //the main GUI class as a switch to be the main pane
     private VBox windowPane; 
+    
+    private BoroughLogic boroughLogic;
     
     /** 
      * Class constructor for Map Panel
@@ -33,8 +35,7 @@ public class MapPanel
      */
     public MapPanel(DateSelector dateSelector)
     {
-        //this.dateSelector = dateSelector;
-        BoroughLogic boroughLogic = new BoroughLogic(dateSelector);
+        boroughLogic = new BoroughLogic(dateSelector);
         
         windowPane = new VBox();
         windowPane.setAlignment(Pos.TOP_CENTER);
@@ -97,5 +98,13 @@ public class MapPanel
     public VBox getMainPane()
     {
         return windowPane;
+    }
+    
+    public void updateButtons()
+    {
+        for(BoroughButton button: buttonArray)
+        {
+            button.setTotalDeaths(boroughLogic.getTotalDeaths(button.toString()));
+        }
     }
 }

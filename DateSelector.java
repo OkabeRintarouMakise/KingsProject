@@ -6,8 +6,8 @@ import java.util.Collections;
  * Implementation of much of the methods found in CovidDataGUI. Bulk of the class
  * deals with the acquiring and manipulating of the Date list found in CovidDataLoader
  *
- * @author Adil Kassam
- * @version (a version number or a date)
+ * @author Adil Kassam, Sebastian Habram
+ * @version 27/03/2023
  */
 public class DateSelector
 {

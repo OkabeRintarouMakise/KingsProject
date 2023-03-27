@@ -15,11 +15,22 @@ import javafx.scene.paint.Color;
  */
 public class StatisticsPanel 
 {
+    // index of statistics
     private int statIndex = 0;
+    
+    // instance of Statistics
     Statistics statistics;
+    
+    // instance of DateSelector
     DateSelector dateSelector;
+    
+    // instance of label
     Label middleLabel;
+    
+    // instance of BorderPane
     BorderPane bPane;
+    
+    // instance of 2 Buttons (left and right)
     Button leftButton;
     Button rightButton;
     /**
