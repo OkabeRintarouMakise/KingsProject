@@ -4,12 +4,13 @@ import javafx.scene.control.ComboBox;
 import java.util.Collections;
 
 /**
- * Write a description of class Main here.
+ * Implementation of much of the methods found in CovidDataGUI. Bulk of the class
+ * deals with the acquiring and manipulating of the Date list found in CovidDataLoader
  *
- * @author (your name)
+ * @author Adil Kassam
  * @version (a version number or a date)
  */
-public class Main
+public class DateSelector
 {
     private CovidDataLoader dateFetcher  = new CovidDataLoader();
     private HashSet<String> dateCollection = new HashSet<>();
@@ -18,7 +19,7 @@ public class Main
     private ComboBox to = new ComboBox();
     private CovidDataDateFilter filter = new CovidDataDateFilter();
     
-    public Main()
+    public DateSelector()
     {
         dateFetcher.load();
         filter.setDataList(dateFetcher.getData());
@@ -26,13 +27,22 @@ public class Main
         
     }
 
-
+    
+    /**
+     * Adds all of the elements of the arraylist orderedDates to the comboboxes: From and To
+     * via a for each method
+     * @param combo The combobox that the dates will be stored in for a drop down box menu
+     */
     public void collectionLoader(ComboBox combo){
         for(String date: orderedDates){
             combo.getItems().add(date);
         }
     }
-
+    
+    /**
+     * Fetches all dates from CovidDataLoader via dateFetcher object,and returns a fully
+     * chronologically sorted list of dates ready to be selected from.
+     */
     public void addSet(){
         for(CovidData record : dateFetcher.getData()){
             dateCollection.add(record.getDate());
@@ -41,21 +51,33 @@ public class Main
         Collections.sort(orderedDates);
     }
     
+    /**
+     * @return Returns the ComboBox From
+     */
     public ComboBox getFrom()
     {
         return from;
     }
     
+    /**
+     * @return Returns the ComboBox To
+     */
     public ComboBox getTo()
     {
         return to;
     }
     
+    /**
+     * @return Returns the user selected current From value
+     */
     public String getFromValue()
     {
         return (String) from.getValue();
     }
-
+    
+    /**
+     * @return Returns the user selected current To value
+     */
     public String getToValue()
     {
         return (String) to.getValue();
@@ -94,6 +116,9 @@ public class Main
         return filter;
     }
     
+    /**
+     * @return Returns a fully sorted orderedDates arraylist
+     */
     public ArrayList<String> getDateList()
     {
         return orderedDates;

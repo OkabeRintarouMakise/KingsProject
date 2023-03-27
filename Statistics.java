@@ -1,13 +1,13 @@
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Collections;
 import java.time.LocalDate;
 
 /**
- * Write a description of class Statistics here.
+ * Statistics is responsible for calculating the values for each statistics and storing
+ * each statistic into an arraylist called "statList"
  *
  * @author Harun Abukar
- * @version (a version number or a date)
+ * @version 26/03/2023
  */
 public class Statistics
 {
@@ -16,22 +16,24 @@ public class Statistics
     ArrayList<CovidData> data = new ArrayList<>();
 
     //instance of the class CovidDataLoader so that we can import data
-    Main main;
+    DateSelector dateSelector;
     /**
-     * Constructor for objects of class Statistics
+     * Constructor for Statistics
+     * loads the collection of covid data then sorts the data in increasing date order
+     * statistics added to arraylist "statlist"
      */
-    public Statistics(Main main)
+    public Statistics(DateSelector dateSelector)
     {
-        data = main.getFilter().getDataList();
+        data = dateSelector.getFilter().getDataList();
         Collections.sort(data, new SortByDate());
 
-        this.main = main;
+        this.dateSelector = dateSelector;
         addStats();
     }
 
     /**
-     * An example of a method - replace this comment with your own
-
+     * @return an entry in statList using @param index
+     *
      */
     public String getStat(int index){
         return statList.get(index);
@@ -45,80 +47,52 @@ public class Statistics
     }
 
     /**
-    @return the total number of deaths in London during the time period
+     * @return the total number of deaths in London during the time period
      */
     private int loadTotalDeaths(){
-
         int totalLondonDeaths = 0;
-        if(main.getFromValue() != null && main.getToValue() != null){
-            LocalDate start = LocalDate.parse(main.getFromValue());
-            LocalDate end = LocalDate.parse(main.getToValue());
-
-            for(CovidData data : data){
-                LocalDate date = LocalDate.parse(data.getDate());
-                if (date.isEqual(start) || date.isEqual(end) || (date.isAfter(start) && date.isBefore(end))){
-                    if(data.getNewDeaths() < 0){
-                        int deaths = data.getNewDeaths() * -1;
-                        totalLondonDeaths += deaths;
-                    }
-                    else{
-                        totalLondonDeaths += data.getNewDeaths();
-                    }
-                }
+        for(CovidData data : data){
+            if(data.getDate().equals(dateSelector.getToValue())){
+                totalLondonDeaths += data.getTotalDeaths();
             }
         }
-
+        if(totalLondonDeaths <= 0){
+            totalLondonDeaths = 0;
+        }
         return totalLondonDeaths;
     }
 
     /**
-    @return the number of average cases in all London boroughs
-    during the time period
+     * @return the number of average cases in all London boroughs
      */
     private int averageCases(){
-
         int averageCases = 0;
-
-        if(main.getFromValue() != null && main.getToValue() != null){
-            LocalDate start = LocalDate.parse(main.getFromValue());
-            LocalDate end = LocalDate.parse(main.getToValue());
-
-            for(CovidData data : data){
-                LocalDate date = LocalDate.parse(data.getDate());
-                if (date.isEqual(start) || date.isEqual(end) || (date.isAfter(start) && date.isBefore(end))){
-                    if(data.getNewDeaths() < 0){
-                        int deaths = data.getNewCases() * -1;
-                        averageCases += deaths;
-                    }
-                    else{
-                        averageCases += data.getNewCases();
-                    }
-                }
+        for(CovidData data : data){
+            if(data.getDate().equals(dateSelector.getToValue())){
+                averageCases += data.getTotalCases();
             }
         }
-
         averageCases = averageCases / 33;
         return averageCases;
-
     }
 
+    /**
+     * @return the percentage change in the parks google mobility measure
+     * during the time period
+     */
     private int averageParksGMR(){
         int averageParksGMR = 0;
         int size = 0;
-        if(main.getFromValue() != null && main.getToValue() != null){
-            LocalDate start = LocalDate.parse(main.getFromValue());
-            LocalDate end = LocalDate.parse(main.getToValue());
+        if(dateSelector.getFromValue() != null && dateSelector.getToValue() != null){
+            LocalDate start = LocalDate.parse(dateSelector.getFromValue());
+            LocalDate end = LocalDate.parse(dateSelector.getToValue());
             for(CovidData data : data){
                 LocalDate date = LocalDate.parse(data.getDate());
                 if (date.isEqual(start) || date.isEqual(end) || (date.isAfter(start) && date.isBefore(end))){
                     size++;    
-                    if(data.getParksGMR() < 0){
-                        int deaths = data.getParksGMR() * -1;
-                        averageParksGMR += deaths;
-                    }
-                    else{
-                        averageParksGMR += data.getParksGMR();
-                    }
+
+                    averageParksGMR += data.getParksGMR();
+
                 }
             }
         }
@@ -128,23 +102,21 @@ public class Statistics
         return averageParksGMR;
     }
 
+    /**
+     * @return the percentage change in the workplaces google mobility measure
+     * during the time period
+     */
     private int averageWorkplacesGMR(){
         int averageWorkplacesGMR = 0;
         int size = 0;
-        if(main.getFromValue() != null && main.getToValue() != null){
-            LocalDate start = LocalDate.parse(main.getFromValue());
-            LocalDate end = LocalDate.parse(main.getToValue());
+        if(dateSelector.getFromValue() != null && dateSelector.getToValue() != null){
+            LocalDate start = LocalDate.parse(dateSelector.getFromValue());
+            LocalDate end = LocalDate.parse(dateSelector.getToValue());
             for(CovidData data : data){
                 LocalDate date = LocalDate.parse(data.getDate());
                 if (date.isEqual(start) || date.isEqual(end) || (date.isAfter(start) && date.isBefore(end))){
-                    size++;    
-                    if(data.getWorkplacesGMR() < 0){
-                        int work = data.getWorkplacesGMR() * -1;
-                        averageWorkplacesGMR += work;
-                    }
-                    else{
-                        averageWorkplacesGMR += data.getWorkplacesGMR();
-                    }
+                    size++;  
+                    averageWorkplacesGMR += data.getWorkplacesGMR();
                 }
             }
         }
@@ -154,30 +126,27 @@ public class Statistics
         return averageWorkplacesGMR;
     }
 
+    /**
+     * @return the date with the highest number of covid deaths up to date, which is the
+     * latest date selected
+     */
     private String getHighestDeathDate(){
-        CovidData maxValue = null;
-        int maxDeaths = 0;
-        for(CovidData data: data){
-            if(data.getTotalDeaths() > maxDeaths){
-                maxDeaths = data.getTotalDeaths();
-                maxValue = data;
-            }
-        }
-        return maxValue.getDate();
+        return dateSelector.getToValue();
     }
 
-    /*private void setDates(){
-    main.getFromValue() = mainGUI.getFrom();
-    main.getToValue() = mainGUI.getTo();
-    }*/
-
+    /**
+     * @return the arraylist of all the covid data
+     */
     public ArrayList<CovidData> getData()
     {
         return data;
     }
 
+    /**
+     * initialise arraylist "statlist" by adding the statistics 
+     */
     public void addStats(){
-        data = main.getFilter().getDataList();
+        data = dateSelector.getFilter().getDataList();
         statList.add("Total deaths in all London boroughs: \n" + loadTotalDeaths());
         statList.add("Average cases per London borough: \n" + averageCases());
         statList.add("Average parks GMR: \n" + averageParksGMR() + "%");
@@ -186,7 +155,9 @@ public class Statistics
             + getHighestDeathDate());
 
     }
-
+    /**
+     * remove all entries from arraylist "statlist"
+     */
     public void removeStats(){
         statList.removeAll(statList);
     }

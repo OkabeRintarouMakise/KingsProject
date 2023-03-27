@@ -3,32 +3,45 @@ import java.awt.Color;
 
 
 /**
- * Write a description of class BoroughButtons here.
+ * Extension class of the JavaFX button class. Holds extra functionality 
+ * like changing color based on conditions. Represents each borough that
+ * needs to be displayed
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Sebastian Habram
+ * @version 27/03/2023
  */
 public class BoroughButton extends Button
 {
+    //Abbreviated Name of the borough to be displayed
     private String name;
+    
+    //Number of total deaths in that borough 
     private int totalDeaths = 0;
     
     /**
      * Constructor for objects of class BoroughButtons
+     * @param boroughName Abbreviated name of the borough
      */
     public BoroughButton(String boroughName)
     {
         this.setPrefSize(75, 75);
         this.setText(boroughName);
         name = boroughName;
-        decideColor();
     }
     
+    /**
+     * Sets the total deaths of the borough in a given period of time
+     * @param givenDeaths The total number of deaths
+     */
     public void setTotalDeaths(int givenDeaths)
     {
         totalDeaths = Math.round(givenDeaths/100) * 100;
+        decideColor();
     }
     
+    /**
+     * Decides which color the button should be based on its total deaths
+     */
     private void decideColor()
     {
         switch(totalDeaths)
@@ -78,14 +91,22 @@ public class BoroughButton extends Button
 
     }  
 
+    /**
+     * Sets the color of the button to a given color 
+     * @param rgbValue The RGB value of the color the button should be
+     */
     private void filterImage(String rgbValue)
     {
         this.setStyle("-fx-background-color:#" + rgbValue);
     }
     
+    /**
+     * Overriden version of toString method for Borough Buttons
+     * @return Name of the borough associated with the button
+     */
     public String toString()
     {
         return name;
     }
-
+    
 }
