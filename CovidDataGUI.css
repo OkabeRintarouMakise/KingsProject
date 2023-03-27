@@ -4,22 +4,19 @@
     -fx-background-size: 1024 683;
 }
 
-
-
-
-
 #firstlabel{
     -fx-text-fill: white;
     -fx-font-size: 70;
-    -fx-text-alignment: center;
 }
 #secondlabel{
     -fx-text-fill: white;
     -fx-font-size: 50;
-    -fx-alignment: baseline-right;
 }
 #thirdlabel{
     -fx-text-fill: white;
     -fx-font-size: 50;
-    -fx-alignment: bottom-left;
+}
+#fourthlabel{
+    -fx-text-fill: white;
+    -fx-font-size: 50;
 }
