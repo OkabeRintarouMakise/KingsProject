@@ -6,16 +6,17 @@ import java.time.LocalDate;
  * Statistics is responsible for calculating the values for each statistics and storing
  * each statistic into an arraylist called "statList"
  *
- * @author Harun Abukar
+ * @author Harun Abukar and Sebastian Habram
  * @version 26/03/2023
  */
 public class Statistics
 {
     // list of all the statistics
     ArrayList<String> statList = new ArrayList<>();
+    // list of all the covid data
     ArrayList<CovidData> data = new ArrayList<>();
 
-    //instance of the class CovidDataLoader so that we can import data
+    // instance of the class CovidDataLoader so that we can import data
     DateSelector dateSelector;
     /**
      * Constructor for Statistics
