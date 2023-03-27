@@ -37,7 +37,7 @@ import java.text.DateFormatSymbols;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class GraphPanel extends Application
+public class GraphPanel
 {
     private BorderPane root = new BorderPane();
     private ArrayList<CovidData> records;
@@ -47,15 +47,12 @@ public class GraphPanel extends Application
     private String gmrValue;
     private String graphValue;
 
-    
     public GraphPanel()
     {
-       //generatePanel(); 
+       generatePanel(); 
     }
     
-    //generatePanel()
-    @Override
-    public void start(Stage stage)
+    private void generatePanel()
     {
         ComboBox graphTypeBox = new ComboBox();
         ComboBox gmrBox = new ComboBox();
@@ -134,10 +131,6 @@ public class GraphPanel extends Application
         generateGraph();
         
         root.getStylesheets().add("GraphPanel.css");
-        //delete after
-        Scene scene = new Scene(root, 580,500);
-        stage.setScene(scene);
-        stage.show();
 
     }
 
@@ -197,7 +190,6 @@ public class GraphPanel extends Application
        yAxis.setLabel("Activity change %");
        xAxis.setLabel("Month");
        
-       System.out.println("Hello");
        clearSeriesData();
        
        yearSeries.clear();
@@ -207,7 +199,6 @@ public class GraphPanel extends Application
            XYChart.Series series = new XYChart.Series();
            series.setName(year);
            addSeries(series);
-           System.out.println(series.getName());
            
        }
    
@@ -232,7 +223,7 @@ public class GraphPanel extends Application
         
            }
        }
-      
+       
        if(graphValue.equals("Bar Chart"))
        {
            final BarChart barChart = new BarChart(xAxis, yAxis);
@@ -273,7 +264,6 @@ public class GraphPanel extends Application
            
            scatterChart.setAnimated(false);
        }
-       
        
     }
     
