@@ -42,6 +42,7 @@ public class MapPanel
         
         windowPane = new VBox();
         windowPane.setAlignment(Pos.TOP_CENTER);
+        windowPane.setId("main");
         
         buttonArray = boroughLogic.createBoroughButtons();
         

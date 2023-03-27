@@ -9,4 +9,11 @@
 .label
 {
     -fx-font: 16px "Serif";
+    -fx-text-fill: #FFFFFF;
+}
+
+#main{
+    -fx-background-image: url("statsImage.jpg");
+    -fx-background-color: transparent;
+    -fx-background-size: cover;
 }
