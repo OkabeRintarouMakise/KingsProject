@@ -25,8 +25,8 @@ import java.io.FileNotFoundException;
 /**
  * This class creates the main BorderPane and assigns the different panes within
  * for different purposes.
- * @author Adil Kassam,
- * @version (a version number or a date)
+ * @author Adil Kassam,Sebastian Habram
+ * @version 27/03/2023
  */
 public class CovidDataGUI extends Application
 {

@@ -16,7 +16,7 @@ import javafx.geometry.Pos;
  * be clicked for further functionality
  *
  * @author Sebastian Habram
- * @version 24/03/2023
+ * @version 27/03/2023
  */
 public class MapPanel  
 {
@@ -27,6 +27,8 @@ public class MapPanel
     //the main GUI class as a switch to be the main pane
     private VBox windowPane; 
     
+    
+    //Sub logic unit for anything related to boroughs
     private BoroughLogic boroughLogic;
     
     /** 
@@ -100,6 +102,9 @@ public class MapPanel
         return windowPane;
     }
     
+    /**
+     * Updates the total deaths value in all buttons
+     */
     public void updateButtons()
     {
         for(BoroughButton button: buttonArray)

@@ -19,7 +19,7 @@ public class DateSelector
     private CovidDataDateFilter filter = new CovidDataDateFilter();// Acquires copy of all data
     
     /**
-     * COnstructor for Date Selector objects
+     * Constructor for Date Selector objects
      */
     public DateSelector()
     {
@@ -113,6 +113,9 @@ public class DateSelector
         filter.setDateList(datesRequired);
     }
     
+    /**
+     * @return Shared between classes data by date filter object
+     */
     public CovidDataDateFilter getFilter()
     {   
         return filter;
