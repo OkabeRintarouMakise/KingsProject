@@ -63,8 +63,8 @@ public class CovidDataGUI extends Application
         dateSelector.collectionLoader(dateSelector.getTo());
         
         //Creation of Drop Down Box Labels
-        Label fromLabel = new Label("From");
-        Label toLabel = new Label("To");
+        Label fromLabel = new Label("From : ");
+        Label toLabel = new Label(" To : ");
         
         //Using DateSelector object, current from and to values are selected
         //from the class and linked to their conditions via setOnAction()
@@ -131,12 +131,7 @@ public class CovidDataGUI extends Application
     }
     
     /**
-     * Set of Conditions to check the validity of the date range being entered. First checks
-     * that both the selected From and To values are not null and are valid inputs.
-     * If the selected From value is greater than the To value, a dialogue is displayed
-     * to the user prompting them to change their input
-     * @param e of type Event ensures that the programme recognises an event occurring when
-     * the user selects a From and To value
+     * Set of Conditions to check the validity of the date range being entered
      */
     private void dropDownBoxConditions(Event e)
     {
@@ -171,9 +166,7 @@ public class CovidDataGUI extends Application
     
     /**
      * Disables the left and right buttons unless a valid date range is entered
-     * @param state of type boolean is initially set to True to make the default state
-     * of the buttons disabled, but under correct conditions is set to False to make 
-     * buttons clickable
+     * @param state of type boolean 
      */
     private void disableButtons(boolean state)
     {
@@ -182,10 +175,8 @@ public class CovidDataGUI extends Application
     }
 
     /**
-     * Method called when the right button is clicked. counter initially set to 0 with the 
-     * fields, but increases with each button click. Current counter value matches specific
-     * panel. When the counter reaches the number of panels it loops back round.
-     * @param event ...
+     * Method called when the right button is clicked to direct which panel to move onto.
+     *  
      */
     private void rightButtonClick(ActionEvent event)
     {
@@ -211,10 +202,7 @@ public class CovidDataGUI extends Application
     }
     
     /**
-     * Method called when the left button is clicked. counter initially set to 0 with the 
-     * fields, but decreases with each button click. Current counter value matches specific
-     * panel. When counter runs out of panels to go back to, it loops back round.
-     * @param event ...
+     * Method called when the left button is clicked to direct which panel to move onto.
      */
     private void leftButtonClick(ActionEvent event)
     {

@@ -1,7 +1,7 @@
 #pane{
     -fx-background-image: url("Covid2.jpg");
-    -fx-background-repeat: stretch; 
-    -fx-background-size: 1024 683;
+    -fx-background-size: cover;
+    
 }
 
 #firstlabel{
