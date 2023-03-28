@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
  * @author Harun Abukar
  * @version 26/03/2023
  */
-public class StatisticsPanel 
+public class StatisticsPanel implements Panel
 {
     // index of statistics
     private int statIndex = 0;
@@ -98,6 +98,7 @@ public class StatisticsPanel
     /**
      * @return the main pain, which is of type BorderPane
      */
+    @Override
     public BorderPane getMainPane(){
         return bPane;
     }

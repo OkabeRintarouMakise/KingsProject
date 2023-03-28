@@ -21,7 +21,7 @@ import javafx.scene.control.ComboBox;
  * @author Sebastian Habram
  * @version 27/03/2023
  */
-public class MapPanel  
+public class MapPanel implements Panel
 {
     //Holds all the available boroughs that can be pressed to acces the data
     private ArrayList<BoroughButton> buttonArray;
@@ -109,6 +109,7 @@ public class MapPanel
     /**
      * @return Main pane of the class
      */
+    @Override
     public VBox getMainPane()
     {
         return windowPane;
