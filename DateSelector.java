@@ -85,6 +85,10 @@ public class DateSelector
         return (String) to.getValue();
     }
     
+    /**
+     * Takes in a from and to date and creates an ArrayList with all
+     * the dates in between those, and the dates itself
+     */
     public void getRequiredDates()
     {
         System.out.println(getToValue() + " " + getFromValue());

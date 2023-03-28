@@ -199,6 +199,8 @@ public class MapPanelTest
         assertEquals(false,observList.isEmpty());
         BoroughButton boroughB1 = (BoroughButton)observList.get(0);
         assertEquals("enfi",boroughB1.getText());
+        boroughB1.setTotalDeaths(99);
+        assertEquals(true,boroughB1.getStyle().contains("-fx-background-color: #00FF0"));
     }
 }
 
