@@ -59,7 +59,7 @@ public class BoroughWindow extends Application
         TableColumn<CovidData,String> residentialColumn = new TableColumn<CovidData, String>("Residential");
         TableColumn<CovidData,String> newCaseColumn = new TableColumn<CovidData, String>("New Covid Cases");
         TableColumn<CovidData,String> totalCaseColumn = new TableColumn<CovidData, String>("Total Covid Cases");
-        TableColumn<CovidData,String> totalDeathColumn = new TableColumn<CovidData, String>("New Covid Deaths");
+        TableColumn<CovidData,String> newDeathColumn = new TableColumn<CovidData, String>("New Covid Deaths");
 
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         retailColumn.setCellValueFactory(new PropertyValueFactory<>("retailRecreationGMR"));
@@ -70,11 +70,11 @@ public class BoroughWindow extends Application
         residentialColumn.setCellValueFactory(new PropertyValueFactory<>("residentialGMR"));
         newCaseColumn.setCellValueFactory(new PropertyValueFactory<>("newCases"));
         totalCaseColumn.setCellValueFactory(new PropertyValueFactory<>("totalCases"));
-        totalDeathColumn.setCellValueFactory(new PropertyValueFactory<>("totalDeaths"));
+        newDeathColumn.setCellValueFactory(new PropertyValueFactory<>("newDeaths"));
         
         
         table.getColumns().setAll(dateColumn, retailColumn, groceryColumn, parksColumn, transitColumn, workplaceColumn,
-                                    residentialColumn, newCaseColumn, totalCaseColumn, totalDeathColumn);
+                                    residentialColumn, newCaseColumn, totalCaseColumn, newDeathColumn);
         
         table.setItems(dataList);
         pane.setCenter(table);
