@@ -31,8 +31,7 @@ public class DateSelector
 
     
     /**
-     * Adds all of the elements of the arraylist orderedDates to the comboboxes: From and To
-     * via a for each method
+     * Adds all of the elements of the arraylist orderedDates to the comboboxes
      * @param combo The combobox that the dates will be stored in for a drop down box menu
      */
     public void collectionLoader(ComboBox combo){
