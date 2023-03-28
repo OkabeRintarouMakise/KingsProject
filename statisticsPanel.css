@@ -1,9 +1,16 @@
 .label {
     -fx-text-alignment: center;
-    -fx-font-size: 20;
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
 }
 
 .button:hover {
     -fx-background-color: linear-gradient(#777777, #bbbbbb);
+}
+
+#pane {
+    -fx-background-image: url("statsImage.jpg");
+    -fx-background-color: transparent;
+    -fx-background-size: cover;
 }
 

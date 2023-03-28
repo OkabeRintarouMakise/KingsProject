@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 
 /**
  * Map Panel is the second available panel to the user. It displays
@@ -16,7 +17,7 @@ import javafx.geometry.Pos;
  * be clicked for further functionality
  *
  * @author Sebastian Habram
- * @version 24/03/2023
+ * @version 27/03/2023
  */
 public class MapPanel  
 {
@@ -27,6 +28,8 @@ public class MapPanel
     //the main GUI class as a switch to be the main pane
     private VBox windowPane; 
     
+    
+    //Sub logic unit for anything related to boroughs
     private BoroughLogic boroughLogic;
     
     /** 
@@ -39,6 +42,7 @@ public class MapPanel
         
         windowPane = new VBox();
         windowPane.setAlignment(Pos.TOP_CENTER);
+        windowPane.setId("main");
         
         buttonArray = boroughLogic.createBoroughButtons();
         
@@ -62,6 +66,13 @@ public class MapPanel
         HBox sixthLevel = new HBox();
         HBox lastLevel = new HBox();
 
+        Label legend = new Label();
+        legend.setAlignment(Pos.CENTER);
+        legend.setText("White <100 Total Deaths \n" +
+                       "Light Green to Green 100-700 \n"+
+                       "Orange/Brown 800-1000 \n" +
+                       "Red 900-1200 \n");
+                       
         secondLevel.setAlignment(Pos.TOP_CENTER);
         thirdLevel.setAlignment(Pos.CENTER);
         fourthLevel.setAlignment(Pos.CENTER);
@@ -90,6 +101,7 @@ public class MapPanel
         
         windowPane.getChildren().addAll(secondLevel, thirdLevel, fourthLevel, 
                                             fifthLevel, sixthLevel, lastLevel);
+        windowPane.getChildren().add(legend);
     }
 
     /**
@@ -100,6 +112,9 @@ public class MapPanel
         return windowPane;
     }
     
+    /**
+     * Updates the total deaths value in all buttons
+     */
     public void updateButtons()
     {
         for(BoroughButton button: buttonArray)

@@ -1,12 +1,17 @@
+/*Sets an image as a background to the chart*/
 #root {
     -fx-padding: 10px;
     -fx-background-image: url("Coronavirus.png");
+    -fx-background-size: cover;
 }
+
+/*Set a border to the chart*/
 .chart-plot-background {
     -fx-border-color: black;
     -fx-border-width: 4px;
 }
 
+/*Get rid of grid lines*/
 .chart-vertical-grid-lines {
     -fx-stroke: transparent;
 }
@@ -19,6 +24,7 @@
     -fx-text-fill: white;
 }
 
+/*Colour each series red, blue and yellow for all types of charts*/
 .default-color0.chart-series-line {
     -fx-stroke: red;
 }
@@ -40,7 +46,31 @@
 }
 
 .default-color2.chart-line-symbol {
-    -fx-background-color: green, white;
+    -fx-background-color: yellow, white;
+}
+
+.default-color0.chart-bar {
+    -fx-bar-fill: red;
+}
+
+.default-color1.chart-bar {
+    -fx-bar-fill: blue;
+}
+
+.default-color2.chart-bar {
+    -fx-bar-fill: yellow;
+}
+
+.default-color0.chart-symbol {
+    -fx-background-color: red;
+}
+
+.default-color1.chart-symbol {
+    -fx-background-color: blue;
+}
+
+.default-color2.chart-symbol {
+    -fx-background-color: yellow;
 }
 
 .axis:top {
