@@ -34,7 +34,7 @@ public class BoroughButton extends Button
      */
     public void setTotalDeaths(int givenDeaths)
     {
-        totalDeaths = Math.round(givenDeaths/100) * 100;
+        totalDeaths = (int) Math.round((float) givenDeaths / 100) * 100;
         decideColor();
     }
     

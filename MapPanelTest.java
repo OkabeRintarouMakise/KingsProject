@@ -199,8 +199,112 @@ public class MapPanelTest
         assertEquals(false,observList.isEmpty());
         BoroughButton boroughB1 = (BoroughButton)observList.get(0);
         assertEquals("enfi",boroughB1.getText());
-        boroughB1.setTotalDeaths(99);
-        assertEquals(true,boroughB1.getStyle().contains("-fx-background-color: #00FF0"));
+        boroughB1.setTotalDeaths(0);
+        String[] styles = boroughB1.getStyle().split(";");
+        boolean rightColor = false;
+        for(String style: styles)
+        {
+            if(style.contains("-fx-background-color:#FFFFFF"))rightColor = true;
+        }
+        assertEquals(true,rightColor);
+        boroughB1.setTotalDeaths(149);
+        String[] styles2 = boroughB1.getStyle().split(";");
+        boolean rightColor2 = false;
+        for(String style: styles2)
+        {
+            if(style.contains("-fx-background-color:#00FF00"))rightColor2 = true;
+        }
+        assertEquals(true,rightColor2);
+        boroughB1.setTotalDeaths(201);
+        String[] styles3 = boroughB1.getStyle().split(";");
+        boolean rightColor3 = false;
+        for(String style: styles3)
+        {
+            if(style.contains("-fx-background-color:#14EB00"))rightColor3 = true;
+        }
+        assertEquals(true,rightColor3);
+        boroughB1.setTotalDeaths(251);
+        String[] styles4 = boroughB1.getStyle().split(";");
+        boolean rightColor4 = false;
+        for(String style: styles4)
+        {
+            if(style.contains("-fx-background-color:#28D700"))rightColor4 = true;
+        }
+        assertEquals(true,rightColor4);
+        boroughB1.setTotalDeaths(367);
+        String[] styles5 = boroughB1.getStyle().split(";");
+        boolean rightColor5 = false;
+        for(String style: styles5)
+        {
+            if(style.contains("-fx-background-color:#3CC300"))rightColor5 = true;
+        }
+        assertEquals(true,rightColor5);
+        boroughB1.setTotalDeaths(549);
+        String[] styles6 = boroughB1.getStyle().split(";");
+        boolean rightColor6 = false;
+        for(String style: styles6)
+        {
+            if(style.contains("-fx-background-color:#50AF00"))rightColor6 = true;
+        }
+        assertEquals(true,rightColor6);
+        boroughB1.setTotalDeaths(600);
+        String[] styles7 = boroughB1.getStyle().split(";");
+        boolean rightColor7 = false;
+        for(String style: styles7)
+        {
+            if(style.contains("-fx-background-color:#649B00"))rightColor7 = true;
+        }
+        assertEquals(true,rightColor7);
+        boroughB1.setTotalDeaths(725);
+        String[] styles8 = boroughB1.getStyle().split(";");
+        boolean rightColor8 = false;
+        for(String style: styles8)
+        {
+            if(style.contains("-fx-background-color:#788700"))rightColor8 = true;
+        }
+        assertEquals(true,rightColor8);
+        boroughB1.setTotalDeaths(775);
+        String[] styles9 = boroughB1.getStyle().split(";");
+        boolean rightColor9 = false;
+        for(String style: styles9)
+        {
+            if(style.contains("-fx-background-color:#8C7300"))rightColor9 = true;
+        }
+        assertEquals(true,rightColor9);
+        boroughB1.setTotalDeaths(900);
+        String[] styles10 = boroughB1.getStyle().split(";");
+        boolean rightColor10 = false;
+        for(String style: styles10)
+        {
+            if(style.contains("-fx-background-color:#A05F00"))rightColor10 = true;
+        }
+        assertEquals(true,rightColor10);
+        boroughB1.setTotalDeaths(1001);
+        String[] styles11 = boroughB1.getStyle().split(";");
+        boolean rightColor11 = false;
+        for(String style: styles11)
+        {
+            if(style.contains("-fx-background-color:#B44B00"))rightColor11 = true;
+        }
+        assertEquals(true,rightColor11);
+        boroughB1.setTotalDeaths(1140);
+        String[] styles12 = boroughB1.getStyle().split(";");
+        boolean rightColor12 = false;
+        for(String style: styles12)
+        {
+            if(style.contains("-fx-background-color:#C83700"))rightColor12 = true;
+        }
+        assertEquals(true,rightColor12);
+        boroughB1.setTotalDeaths(1249);
+        String[] styles13 = boroughB1.getStyle().split(";");
+        boolean rightColor13 = false;
+        for(String style: styles13)
+        {
+            if(style.contains("-fx-background-color:#DC2300"))rightColor13 = true;
+        }
+        assertEquals(true,rightColor13);
+        
+        
     }
 }
 
