@@ -10,6 +10,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
+
 
 /**
  * Map Panel is the second available panel to the user. It displays
