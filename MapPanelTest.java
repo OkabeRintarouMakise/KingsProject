@@ -9,8 +9,8 @@ import javafx.collections.ObservableList;
 /**
  * The test class MapPanelTest.
  *
- * @author  (your name)
- * @version (a version number or a date)
+ * @author  Sebastian Habram
+ * @version 28/03/2023
  */
 public class MapPanelTest
 {
@@ -49,13 +49,18 @@ public class MapPanelTest
 
 
     
-
+    /**
+     * Tests for the presence of a VBox
+     */
     @Test
     public void CheckForVBox()
     {
         assertNotNull(mapPanel1.getMainPane());
     }
 
+    /**
+     * Tests for the presence of VBox children
+     */
     @Test
     public void CheckForVBoxChildren()
     {
@@ -63,6 +68,9 @@ public class MapPanelTest
         assertNotNull(vBox1.getChildren());
     }
 
+    /**
+     * Tests for buttons occuring on te first level
+     */
     @Test
     public void CheckForFirstLevelButtons()
     {
@@ -73,6 +81,9 @@ public class MapPanelTest
         assertEquals("enfi", boroughB1.toString());
     }
 
+    /**
+     * Tests for buttons occuring on te second level
+     */
     @Test
     public void CheckForSecondLevelButtons()
     {
@@ -88,6 +99,9 @@ public class MapPanelTest
         assertEquals("walt", boroughB3.toString());
     }
 
+    /**
+     * Tests for buttons occuring on the third level
+     */
     @Test
     public void CheckForThirdLevelButtons()
     {
@@ -111,6 +125,9 @@ public class MapPanelTest
         assertEquals("have", boroughB7.toString());
     }
     
+    /**
+     * Tests for buttons occuring on the fourth level
+     */
     @Test
     public void CheckForFourthLevelButtons()
     {
@@ -134,6 +151,9 @@ public class MapPanelTest
         assertEquals("bark", boroughB7.toString());
     }
     
+    /**
+     * Tests for buttons occuring on the fifth level
+     */
     @Test
     public void CheckForFifthLevelButtons()
     {
@@ -155,6 +175,9 @@ public class MapPanelTest
         assertEquals("bexl", boroughB6.toString());
     }
     
+    /**
+     * Tests for buttons occuring on the sixth level
+     */
     @Test
     public void CheckForSixthLevelButtons()
     {
@@ -174,6 +197,9 @@ public class MapPanelTest
         assertEquals("lews", boroughB5.toString());
     }
     
+    /**
+     * Tests for buttons occuring on the last level
+     */
     @Test
     public void CheckForLastLevelButtons()
     {
@@ -191,6 +217,10 @@ public class MapPanelTest
         assertEquals("brom", boroughB4.toString());
     }
     
+    /**
+     * Tests if buttons properties are functioning, color decider and 
+     * correct text label
+     */
     @Test
     public void CheckForButtonProperties()
     {
